@@ -50,6 +50,7 @@
     <Compile Include="ConsoleInput.cs" />
     <Compile Include="ConsoleIO.cs" />
     <Compile Include="IUserInput.cs" />
+    <Compile Include="StartGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

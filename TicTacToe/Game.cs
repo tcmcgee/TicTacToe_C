@@ -134,14 +134,5 @@ namespace TicTacToe
             gameOver = false;
             turn = true;
         }
-
-        static void Main(string[] args)
-        {
-
-            Console.WriteLine();
-            Game game = new Game();
-            game.StartGame();
-
-        }
     }
 }
