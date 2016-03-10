@@ -25,13 +25,59 @@ namespace TicTacToe.Tests
         }
 
         [TestMethod()]
-        public void GetBoardTest()
+        public void GetEmptyBoardTest()
         {
             Board b = new Board();
 
             string[] currentBoard = b.GetBoard();
 
             Assert.IsTrue(IsEqualBoard(currentBoard, emptyBoard));
+        }
+
+        [TestMethod()]
+        public void GetFullBoardTest()
+        {
+            Board b = new Board();
+            string[] newBoard = { "X", "O", "X", "O", "X", "O", "X", "O", "X" };
+
+            b.SetBoard(newBoard);
+            string[] currentBoard = b.GetBoard();
+
+            Assert.IsTrue(IsEqualBoard(currentBoard, newBoard));
+        }
+
+        [TestMethod()]
+        public void GetEmptyStringBoardArrayTest()
+        {
+            Board b = new Board();
+
+            string[] stringBoard = b.GetStringBoardArray();
+
+            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " "}));
+        }
+
+        [TestMethod()]
+        public void GetOccupiedStringBoardArrayTest()
+        {
+            Board b = new Board();
+            string[] newBoard = { "X", null, null, null, null, null, null, null, null };
+
+            b.SetBoard(newBoard);
+            string[] stringBoard = b.GetStringBoardArray();
+            
+            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { "X", " ", " ", " ", " ", " ", " ", " ", " " }));
+        }
+
+        [TestMethod()]
+        public void GetFullStringBoardArrayTest()
+        {
+            Board b = new Board();
+            string[] newBoard = { "X", "O", "X", "O", "X", "O", "X", "O", "X" };
+
+            b.SetBoard(newBoard);
+            string[] stringBoard = b.GetStringBoardArray();
+
+            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { "X", "O", "X", "O", "X", "O", "X", "O", "X" }));
         }
 
         public bool IsEqualBoard(string[] board1, string[] board2)
