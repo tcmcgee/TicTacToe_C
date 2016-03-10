@@ -22,25 +22,16 @@ namespace TicTacToe
             return message;
         }
 
-        public string GetStringBoard(Board b)
+        public string GetBoardString(Board b)
         {
-            string[] boardArray = b.GetBoard();
-            string[] stringTiles = new string[boardArray.Length];
-            int index = 0;
-
-            foreach (string tile in boardArray)
-            {
-                stringTiles[index] = string.IsNullOrEmpty(tile) ? " " : tile;
-                index++;
-            }
             StringBuilder builder = new StringBuilder();
-            builder.AppendFormat( "_{0}_|_{1}_|_{2}_\n_{3}_|_{4}_|_{5}_\n {6} | {7} | {8} ",stringTiles);
+            builder.AppendFormat( "_{0}_|_{1}_|_{2}_\n_{3}_|_{4}_|_{5}_\n {6} | {7} | {8} ", b.GetStringBoardArray());
             return builder.ToString();
         }
 
         public string DisplayBoard(Board board)
         {
-            string stringBoard = GetStringBoard(board);
+            string stringBoard = GetBoardString(board);
             output.Display(stringBoard);
 
             return stringBoard;
@@ -108,17 +99,16 @@ namespace TicTacToe
             }
             return selection;
         }
-  
+
         public int GetPlayerMove(Board board, IUserInput input)
         {
             string[] boardArray = board.GetBoard();
             DisplayBoard(board);
             int selection = -1;
             bool done = false;
-            string message = "\nEnter the number corresponding with your move! (1-9): ";
             while (done == false)
             {
-                selection = GetUserInput(input, message, 1, 9);
+                selection = GetUserInput(input, "\nEnter the number corresponding with your move! (1-9): ", 1, 9);
                 done = (boardArray[selection - 1] == null);
                 if (done == false)
                 {
@@ -132,7 +122,6 @@ namespace TicTacToe
         {
             int selection = GetUserInput(input,"Would you like to play again?\n1.Yes\n2.No",1,2);
             return selection == 1 ? true : false;
-
         }
     }
 }

@@ -25,5 +25,15 @@ namespace TicTacToe
         {
             return board;
         }
+
+        public string[] GetStringBoardArray()
+        {
+            string[] stringBoard = (string[]) board.Clone();
+            for (int i = 0; i < stringBoard.Length;i++)
+            {
+                stringBoard[i] = (stringBoard[i] == null) ? " " : stringBoard[i]; 
+            }
+            return stringBoard;
+        }
     }
 }

@@ -168,6 +168,14 @@ namespace TicTacToe.Tests
 
             Assert.IsTrue(game.IsDiagonalWin(8, true));
         }
+        [TestMethod()]
+        public void IsNotShortCircuitDiagnolTest()
+        {
+            Game game = new Game();
+            game.Turn(new MockedInput("2"));
+
+            Assert.IsFalse(game.IsDiagonalWin(1, true));
+        }
 
         [TestMethod()]
         public void IsDiagonalWinOTest()
