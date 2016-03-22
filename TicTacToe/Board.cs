@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TicTacToe
+﻿namespace TicTacToe
 {
     public class Board
     {
@@ -28,10 +22,10 @@ namespace TicTacToe
 
         public string[] GetStringBoardArray()
         {
-            string[] stringBoard = (string[]) board.Clone();
-            for (int i = 0; i < stringBoard.Length;i++)
+            string[] stringBoard = (string[])board.Clone();
+            for (int i = 0; i < stringBoard.Length; i++)
             {
-                stringBoard[i] = (stringBoard[i] == null) ? " " : stringBoard[i]; 
+                stringBoard[i] = (stringBoard[i] == null) ? " " : stringBoard[i];
             }
             return stringBoard;
         }

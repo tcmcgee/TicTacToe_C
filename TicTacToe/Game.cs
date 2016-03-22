@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToe
 {
@@ -61,7 +58,6 @@ namespace TicTacToe
             Move(selection, turn);
             turn = !turn;
         }
-
 
         public int[][] GetHorizontalWins()
         {
@@ -155,8 +151,6 @@ namespace TicTacToe
             string piece = GetPiece(turn);
             string[] boardArray = board.GetBoard();
             int rowLength = (int)Math.Sqrt(boardArray.Length);
-
-            //if (possibleWins.Length == 0) return false;
             foreach (int[] win in possibleWins)
             {
                 int count = 0;
@@ -172,7 +166,6 @@ namespace TicTacToe
             }
             return false;
         }
-
 
         public string GetPiece(bool turn)
         {

@@ -1,27 +1,23 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TicTacToe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToe.Tests
 {
-    class MockedInput : IUserInput
+    internal class MockedInput : IUserInput
     {
-        string returnValue;
+        private string returnValue;
+
         public MockedInput(string returnValue)
         {
             this.returnValue = returnValue;
         }
+
         public string GetInput()
         {
             return this.returnValue;
         }
     }
 
-    class MockedOutput : IUserOutput
+    internal class MockedOutput : IUserOutput
     {
         public void Display(string str)
         {
@@ -50,6 +46,7 @@ namespace TicTacToe.Tests
 
             Assert.AreEqual(console.DisplayBoard(emptyBoard), "_ _|_ _|_ _\n_ _|_ _|_ _\n   |   |   ");
         }
+
         [TestMethod()]
         public void DisplayOccupiedBoardTest()
         {
@@ -62,7 +59,6 @@ namespace TicTacToe.Tests
             b.SetBoard(board);
 
             Assert.AreEqual(console.DisplayBoard(b), "_X_|_ _|_ _\n_ _|_ _|_ _\n   |   |   ");
-
         }
 
         [TestMethod()]
@@ -139,7 +135,7 @@ namespace TicTacToe.Tests
             Assert.AreEqual(console.DisplayGameOverMessage(false, true), "Game Over! It's a Tie!");
         }
 
-       [TestMethod()]
+        [TestMethod()]
         public void GetPlayAgainTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedOutput());

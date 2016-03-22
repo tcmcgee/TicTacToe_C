@@ -1,17 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TicTacToe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TicTacToe.Tests
 {
     [TestClass()]
     public class BoardTests
     {
-        string[] emptyBoard = { null, null, null, null, null, null, null, null, null };
+        private string[] emptyBoard = { null, null, null, null, null, null, null, null, null };
 
         [TestMethod()]
         public void SetBoardTest()
@@ -53,7 +47,7 @@ namespace TicTacToe.Tests
 
             string[] stringBoard = b.GetStringBoardArray();
 
-            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " "}));
+            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " " }));
         }
 
         [TestMethod()]
@@ -64,7 +58,7 @@ namespace TicTacToe.Tests
 
             b.SetBoard(newBoard);
             string[] stringBoard = b.GetStringBoardArray();
-            
+
             Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { "X", " ", " ", " ", " ", " ", " ", " ", " " }));
         }
 
