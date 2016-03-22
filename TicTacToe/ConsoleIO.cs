@@ -5,7 +5,7 @@ namespace TicTacToe
 {
     public class ConsoleIO
     {
-        IUserOutput output;
+        private IUserOutput output;
 
         public ConsoleIO(IUserOutput output)
         {
@@ -22,7 +22,7 @@ namespace TicTacToe
         public string GetBoardString(Board b)
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendFormat( "_{0}_|_{1}_|_{2}_\n_{3}_|_{4}_|_{5}_\n {6} | {7} | {8} ", b.GetStringBoardArray());
+            builder.AppendFormat("_{0}_|_{1}_|_{2}_\n_{3}_|_{4}_|_{5}_\n {6} | {7} | {8} ", b.GetStringBoardArray());
             return builder.ToString();
         }
 
@@ -43,7 +43,7 @@ namespace TicTacToe
             output.Display(message);
             message += DisplayBoard(sampleBoard);
             output.Display("");
-            return message;    
+            return message;
         }
 
         public string DisplayGameOverMessage(bool winnerTurn, bool tie)
@@ -63,7 +63,7 @@ namespace TicTacToe
             }
             else
             {
-                message =  String.Empty;
+                message = String.Empty;
             }
             output.Display(message);
             return message;
@@ -117,7 +117,7 @@ namespace TicTacToe
 
         public bool GetPlayAgain(IUserInput input)
         {
-            int selection = GetUserInput(input,"Would you like to play again?\n1.Yes\n2.No",1,2);
+            int selection = GetUserInput(input, "Would you like to play again?\n1.Yes\n2.No", 1, 2);
             return selection == 1 ? true : false;
         }
     }
