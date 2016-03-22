@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TicTacToe
@@ -46,7 +47,7 @@ namespace TicTacToe
 
         public void Move(int selection, bool turn)
         {
-            string[] tempBoard = board.GetBoard();
+            string[] tempBoard = board.GetBoardArray();
             tempBoard[selection] = GetPiece(turn);
             board.SetBoard(tempBoard);
             this.gameOver = IsGameOver(turn) ? true : false;
@@ -54,14 +55,23 @@ namespace TicTacToe
 
         public void Turn(IUserInput input)
         {
-            int selection = console.GetPlayerMove(board, input) - 1;
+            int selection;
+            if (turn)
+            {
+                selection = console.GetPlayerMove(board, input) - 1;
+            }
+            else
+            {
+                ComputerPlayer computer = new ComputerPlayer(this);
+                selection = computer.negamax(board.GetBoardArray(), turn, 0, new Dictionary<string, int>());
+            }
             Move(selection, turn);
             turn = !turn;
         }
 
         public int[][] GetHorizontalWins()
         {
-            int rowLength = (int)Math.Sqrt(board.GetBoard().Length);
+            int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
             int[][] horizontalWins = new int[rowLength][];
             int count = 0;
             for (int row = 0; row < rowLength; row++)
@@ -78,7 +88,7 @@ namespace TicTacToe
 
         public int[][] GetVerticalWins()
         {
-            int rowLength = (int)Math.Sqrt(board.GetBoard().Length);
+            int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
             int[][] verticalWins = new int[rowLength][];
             int count = 0;
             for (int row = 0; row < rowLength; row++)
@@ -97,7 +107,7 @@ namespace TicTacToe
 
         public int[][] GetDiagonalWins()
         {
-            int rowLength = (int)Math.Sqrt(board.GetBoard().Length);
+            int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
             int[] leftDiag = new int[rowLength];
             int[] rightDiag = new int[rowLength];
             int left = 0;
@@ -123,7 +133,7 @@ namespace TicTacToe
 
         public bool IsTie()
         {
-            string[] boardArray = board.GetBoard();
+            string[] boardArray = board.GetBoardArray();
             string[] flatArray = boardArray.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
             tie = (boardArray.Length == flatArray.Length);
@@ -149,7 +159,7 @@ namespace TicTacToe
         public bool IsWin(int[][] possibleWins, bool turn)
         {
             string piece = GetPiece(turn);
-            string[] boardArray = board.GetBoard();
+            string[] boardArray = board.GetBoardArray();
             int rowLength = (int)Math.Sqrt(boardArray.Length);
             foreach (int[] win in possibleWins)
             {

@@ -15,7 +15,7 @@
             this.board = newBoard;
         }
 
-        public string[] GetBoard()
+        public string[] GetBoardArray()
         {
             return board;
         }

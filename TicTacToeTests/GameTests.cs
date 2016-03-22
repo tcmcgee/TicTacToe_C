@@ -28,7 +28,7 @@ namespace TicTacToe.Tests
             game.Move(0, true);
             string[] gameBoard = { "X", null, null, null, null, null, null, null, null };
 
-            Assert.AreEqual(IsEqualBoard(game.board.GetBoard(), gameBoard), true);
+            Assert.AreEqual(IsEqualBoard(game.board.GetBoardArray(), gameBoard), true);
         }
 
         [TestMethod()]
@@ -39,7 +39,7 @@ namespace TicTacToe.Tests
 
             game.Turn(new MockedInput("1"));
 
-            Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoard()), true);
+            Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
         }
 
         [TestMethod()]
@@ -51,7 +51,7 @@ namespace TicTacToe.Tests
             game.Turn(new MockedInput("1"));
             game.Turn(new MockedInput("2"));
 
-            Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoard()), true);
+            Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
         }
 
         [TestMethod()]
@@ -60,7 +60,7 @@ namespace TicTacToe.Tests
             Game game = new Game();
             game.Turn(new MockedInput("5"));
 
-            Assert.AreEqual(game.board.GetBoard()[4], "X");
+            Assert.AreEqual(game.board.GetBoardArray()[4], "X");
         }
 
         [TestMethod()]
@@ -69,7 +69,7 @@ namespace TicTacToe.Tests
             Game game = new Game();
             game.Turn(new MockedInput("5"));
 
-            Assert.IsFalse(game.board.GetBoard()[4] == "O");
+            Assert.IsFalse(game.board.GetBoardArray()[4] == "O");
         }
 
         [TestMethod()]
@@ -79,7 +79,7 @@ namespace TicTacToe.Tests
             game.Turn(new MockedInput("5"));
             game.Turn(new MockedInput("7"));
 
-            Assert.AreEqual(game.board.GetBoard()[6], "O");
+            Assert.AreEqual(game.board.GetBoardArray()[6], "O");
         }
 
         [TestMethod()]
@@ -257,7 +257,7 @@ namespace TicTacToe.Tests
 
             game.ResetGame();
 
-            Assert.IsTrue(IsEqualBoard(game.board.GetBoard(), emptyBoard));
+            Assert.IsTrue(IsEqualBoard(game.board.GetBoardArray(), emptyBoard));
         }
 
         [TestMethod()]

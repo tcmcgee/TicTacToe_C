@@ -99,7 +99,7 @@ namespace TicTacToe
 
         public int GetPlayerMove(Board board, IUserInput input)
         {
-            string[] boardArray = board.GetBoard();
+            string[] boardArray = board.GetBoardArray();
             DisplayBoard(board);
             int selection = -1;
             bool done = false;

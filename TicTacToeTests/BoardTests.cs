@@ -15,7 +15,7 @@ namespace TicTacToe.Tests
 
             b.SetBoard(newBoard);
 
-            Assert.IsTrue(IsEqualBoard(newBoard, b.GetBoard()));
+            Assert.IsTrue(IsEqualBoard(newBoard, b.GetBoardArray()));
         }
 
         [TestMethod()]
@@ -23,7 +23,7 @@ namespace TicTacToe.Tests
         {
             Board b = new Board();
 
-            string[] currentBoard = b.GetBoard();
+            string[] currentBoard = b.GetBoardArray();
 
             Assert.IsTrue(IsEqualBoard(currentBoard, emptyBoard));
         }
@@ -35,7 +35,7 @@ namespace TicTacToe.Tests
             string[] newBoard = { "X", "O", "X", "O", "X", "O", "X", "O", "X" };
 
             b.SetBoard(newBoard);
-            string[] currentBoard = b.GetBoard();
+            string[] currentBoard = b.GetBoardArray();
 
             Assert.IsTrue(IsEqualBoard(currentBoard, newBoard));
         }
