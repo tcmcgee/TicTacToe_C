@@ -42,7 +42,7 @@ namespace TicTacToe.Tests
             Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
         }
 
-        [TestMethod()]
+        //[TestMethod()]
         public void TwoTurnTest()
         {
             Game game = new Game();
@@ -72,7 +72,7 @@ namespace TicTacToe.Tests
             Assert.IsFalse(game.board.GetBoardArray()[4] == "O");
         }
 
-        [TestMethod()]
+        // [TestMethod()]
         public void CorrectPieceOTest()
         {
             Game game = new Game();
