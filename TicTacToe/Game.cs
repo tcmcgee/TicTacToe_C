@@ -15,15 +15,17 @@ namespace TicTacToe
         private bool gameOver = false;
         private bool tie = false;
 
-        private int[][] horizontalWins = { new int[] { 1, 2 }, new int[] { 0, 2 }, new int[] { 0, 1 }, new int[] { 4, 5 }, new int[] { 3, 5 }, new int[] { 3, 4 }, new int[] { 7, 8 }, new int[] { 6, 8 }, new int[] { 6, 7 } };
-        private int[][] verticalWins =   { new int[] { 3, 6 }, new int[] { 4, 7 }, new int[] { 5, 8 }, new int[] { 0, 6 }, new int[] { 1, 7 }, new int[] { 2, 8 }, new int[] { 0, 3 }, new int[] { 1, 4 }, new int[] { 2, 5 } };
-        private int[][] rightDiagonalWins = { new int[] { 4, 8 }, new int[] { }, new int[] { 4, 6 }, new int[] { }, new int[] { 0, 8 }, new int[] { }, new int[]{ 2, 4 }, new int[] { }, new int[] { 0, 4 } };
-        private int[][] leftDiagonalWins =  { new int[] { }, new int[] { }, new int[] { }, new int[] { }, new int[] { 2, 6 }, new int[] { }, new int[] { }, new int[] { }, new int[] { } };
+        private int[][] horizontalWins;
+        private int[][] verticalWins;
+        private int[][] diagonalWins;
 
         public Game()
         {
             this.board = new Board();
             this.console = new ConsoleIO(new ConsoleOutput());
+            this.horizontalWins = GetHorizontalWins();
+            this.verticalWins = GetVerticalWins();
+            this.diagonalWins = GetDiagonalWins();
         }
 
         public void StartGame()
@@ -44,27 +46,82 @@ namespace TicTacToe
                 playAgain = console.GetPlayAgain(new ConsoleInput());
             } while (playAgain);
         }
-        
+
         public void Move(int selection, bool turn)
         {
             string[] tempBoard = board.GetBoard();
             tempBoard[selection] = GetPiece(turn);
             board.SetBoard(tempBoard);
-            this.gameOver = IsGameOver(selection, turn) ? true : false;
+            this.gameOver = IsGameOver(turn) ? true : false;
         }
 
         public void Turn(IUserInput input)
         {
             int selection = console.GetPlayerMove(board, input) - 1;
             Move(selection, turn);
-            turn = !turn;            
+            turn = !turn;
         }
 
-        public bool IsGameOver(int selection, bool turn)
+
+        public int[][] GetHorizontalWins()
         {
-            return IsHorizontalWin(selection, turn)
-                || IsVerticalWin(selection, turn) 
-                || IsDiagonalWin(selection, turn) 
+            int rowLength = (int)Math.Sqrt(board.GetBoard().Length);
+            int[][] horizontalWins = new int[rowLength][];
+            int count = 0;
+            for (int row = 0; row < rowLength; row++)
+            {
+                int[] win = new int[rowLength];
+                for (int col = 0; col < rowLength; col++)
+                {
+                    win[col] = count++;
+                }
+                horizontalWins[row] = win;
+            }
+            return horizontalWins;
+        }
+
+        public int[][] GetVerticalWins()
+        {
+            int rowLength = (int)Math.Sqrt(board.GetBoard().Length);
+            int[][] verticalWins = new int[rowLength][];
+            int count = 0;
+            for (int row = 0; row < rowLength; row++)
+            {
+                int[] win = new int[rowLength];
+                count = row;
+                for (int col = 0; col < rowLength; col++)
+                {
+                    win[col] = count;
+                    count += 3;
+                }
+                verticalWins[row] = win;
+            }
+            return verticalWins;
+        }
+
+        public int[][] GetDiagonalWins()
+        {
+            int rowLength = (int)Math.Sqrt(board.GetBoard().Length);
+            int[] leftDiag = new int[rowLength];
+            int[] rightDiag = new int[rowLength];
+            int left = 0;
+            int right = rowLength - 1;
+            for (int i = 0; i < rowLength; i++)
+            {
+                leftDiag[i] = left;
+                rightDiag[i] = right;
+                left += rowLength + 1;
+                right += rowLength - 1;
+            }
+            int[][] diagonalWins = new int[][] { leftDiag, rightDiag };
+            return diagonalWins;
+        }
+
+        public bool IsGameOver(bool turn)
+        {
+            return IsHorizontalWin(turn)
+                || IsVerticalWin(turn)
+                || IsDiagonalWin(turn)
                 || IsTie();
         }
 
@@ -78,40 +135,44 @@ namespace TicTacToe
             return tie;
         }
 
-        public bool IsHorizontalWin(int selection,bool turn)
+        public bool IsHorizontalWin(bool turn)
         {
-            return IsWin(horizontalWins, selection, turn);
+            return IsWin(horizontalWins, turn);
         }
 
-        public bool IsVerticalWin(int selection, bool turn)
+        public bool IsVerticalWin(bool turn)
         {
-            return IsWin(verticalWins, selection, turn);
+            return IsWin(verticalWins, turn);
         }
 
-        public bool IsDiagonalWin(int selection, bool turn)
+        public bool IsDiagonalWin(bool turn)
         {
-            return (IsWin(rightDiagonalWins, selection, turn) 
-                 || IsWin(leftDiagonalWins, selection, turn));
+            return (IsWin(diagonalWins, turn));
         }
 
-        public bool IsWin(int[][] possibleWins, int selection, bool turn)
+        public bool IsWin(int[][] possibleWins, bool turn)
         {
-            int[] possibleSelectionWins = possibleWins[selection];
             string piece = GetPiece(turn);
             string[] boardArray = board.GetBoard();
+            int rowLength = (int)Math.Sqrt(boardArray.Length);
 
-            if (possibleSelectionWins.Length == 0) return false;
-
-            foreach (int pieceIndex in possibleSelectionWins)
+            //if (possibleWins.Length == 0) return false;
+            foreach (int[] win in possibleWins)
             {
-                if (boardArray[pieceIndex] != piece)
+                int count = 0;
+                foreach (int index in win)
                 {
-                    return false;
+                    if (boardArray[index] == piece)
+                        count++;
+                }
+                if (count == rowLength)
+                {
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
-        
+
 
         public string GetPiece(bool turn)
         {

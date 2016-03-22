@@ -98,7 +98,7 @@ namespace TicTacToe.Tests
             game.board.SetBoard(gameBoard);
 
             game.Turn(new MockedInput("3"));
-            Assert.IsTrue(game.IsHorizontalWin(2,true));
+            Assert.IsTrue(game.IsHorizontalWin(true));
         }
 
         [TestMethod()]
@@ -106,14 +106,12 @@ namespace TicTacToe.Tests
         {
             Game game = new Game();
             string[] gameBoard = { "X", "X", "O",
-                                   "O", null, "O",
+                                   "O", "O", "O",
                                    null, null, null };
 
             game.board.SetBoard(gameBoard);
 
-            game.Turn(new MockedInput("5"));
-
-            Assert.AreEqual(game.IsHorizontalWin(4, false),true);
+            Assert.IsTrue(game.IsHorizontalWin(false));
         }
 
         [TestMethod()]
@@ -125,27 +123,27 @@ namespace TicTacToe.Tests
 
             game.Turn(new MockedInput("9"));
 
-            Assert.IsFalse(game.IsHorizontalWin(8, false));
+            Assert.IsFalse(game.IsHorizontalWin(false));
         }
 
         [TestMethod()]
         public void IsVerticalWinXTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", "X", "O", "X", "O", "O", null, null, null };
+            string[] gameBoard = { "X", "X", "O", "X", "O", "O", "X", null, null };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsTrue(game.IsVerticalWin(6, true));
+            Assert.IsTrue(game.IsVerticalWin(true));
         }
 
         [TestMethod()]
         public void IsVerticalWinOTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", "O", "X", "X", null, "O", null, "O", null };
+            string[] gameBoard = { "X", "O", "X", "X", "O", "O", null, "O", null };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsTrue(game.IsVerticalWin(4, false));
+            Assert.IsTrue(game.IsVerticalWin(false));
         }
 
         [TestMethod()]
@@ -155,7 +153,7 @@ namespace TicTacToe.Tests
             string[] gameBoard = { "X", "X", "O", "O", null, "O", null, null, null };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsFalse(game.IsVerticalWin(4, false));
+            Assert.IsFalse(game.IsVerticalWin(false));
         }
 
 
@@ -163,10 +161,10 @@ namespace TicTacToe.Tests
         public void IsDiagonalWinXTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", "X", "O", "X", "X", "O", null, null, null };
+            string[] gameBoard = { "X", "X", "O", "X", "X", "O", null, null, "X" };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsTrue(game.IsDiagonalWin(8, true));
+            Assert.IsTrue(game.IsDiagonalWin(true));
         }
         [TestMethod()]
         public void IsNotShortCircuitDiagnolTest()
@@ -174,17 +172,19 @@ namespace TicTacToe.Tests
             Game game = new Game();
             game.Turn(new MockedInput("2"));
 
-            Assert.IsFalse(game.IsDiagonalWin(1, true));
+            Assert.IsFalse(game.IsDiagonalWin(true));
         }
 
         [TestMethod()]
         public void IsDiagonalWinOTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", "O", "O", "X", null, "O", "O", "O", null };
+            string[] gameBoard = { "X", "O", "O",
+                                    "X", "O", "O",
+                                    "O", "O", null };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsTrue(game.IsDiagonalWin(4, false));
+            Assert.IsTrue(game.IsDiagonalWin(false));
         }
 
         [TestMethod()]
@@ -194,7 +194,7 @@ namespace TicTacToe.Tests
             string[] gameBoard = { "X", "X", "O", "O", null, "O", null, null, null };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsFalse(game.IsDiagonalWin(4, false));
+            Assert.IsFalse(game.IsDiagonalWin(false));
         }
 
         [TestMethod()]
@@ -211,7 +211,7 @@ namespace TicTacToe.Tests
         public void IsNotTieTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", null, "O", "O", "O", "X", "X", "O", "X" };
+            string[] gameBoard = { "X", null , "O", "O", "O", "X", "X", "O", "X" };
             game.board.SetBoard(gameBoard);
 
             Assert.IsFalse(game.IsTie());
@@ -226,19 +226,19 @@ namespace TicTacToe.Tests
                                    "X", "O", "X" };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsTrue(game.IsGameOver(2, false));
+            Assert.IsTrue(game.IsGameOver(false));
         }
 
         [TestMethod()]
         public void GameOverWinTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", "X", null,
+            string[] gameBoard = { "X", "X", "X",
                                    "O", null, "X",
                                    "X", "O", "X" };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsTrue(game.IsGameOver(2, true));
+            Assert.IsTrue(game.IsGameOver(true));
         }
 
         [TestMethod()]
@@ -250,7 +250,7 @@ namespace TicTacToe.Tests
                                    "X", "O", "X" };
             game.board.SetBoard(gameBoard);
 
-            Assert.IsFalse(game.IsGameOver(2, false));
+            Assert.IsFalse(game.IsGameOver(false));
         }
 
         [TestMethod()]
@@ -268,10 +268,75 @@ namespace TicTacToe.Tests
             Assert.IsTrue(IsEqualBoard(game.board.GetBoard(),emptyBoard));
         }
 
+        [TestMethod()]
+        public void GetsHorizontalWins()
+        {
+            Game game = new Game();
+            int[][] expectedWins = new int[][] { new int[] { 0, 1, 2 }, new int[] { 3, 4, 5 }, new int[] { 6, 7, 8 } };
+            string[] gameBoard = { "X", "X", null,
+                                   "O", null, "X",
+                                   "X", "O", "X" };
+            game.board.SetBoard(gameBoard);
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins,game.GetHorizontalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsVerticalWins()
+        {
+            Game game = new Game();
+            int[][] expectedWins = new int[][] { new int[] { 0, 3, 6 }, new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 } };
+            string[] gameBoard = { "X", "X", null,
+                                   "O", null, "X",
+                                   "X", "O", "X" };
+            game.board.SetBoard(gameBoard);
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetVerticalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsDiagonalWins()
+        {
+            Game game = new Game();
+            int[][] expectedWins = new int[][] { new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 }};
+            string[] gameBoard = { "X", "X", null,
+                                   "O", null, "X",
+                                   "X", "O", "X" };
+            game.board.SetBoard(gameBoard);
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetDiagonalWins()));
+        }
 
 
 
 
+
+
+        public bool IsEqualArrayOfInts(int[][] array1, int[][] array2)
+        {
+            if (array1.Length == array2.Length)
+            {
+                for (int i = 0; i < array1.Length; i++)
+                {
+                    if (array1[i].Length != array2[i].Length)
+                    {
+                        return false;
+                    }
+                    for (int j = 0; j < array1[i].Length; j++)
+                    {
+                        if (array1[i][j] != array2[i][j])
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return true;
+        }
         public bool IsEqualBoard(string[] board1, string[] board2)
         {
             if (board1.Length == board2.Length)
