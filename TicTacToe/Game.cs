@@ -7,9 +7,9 @@ namespace TicTacToe
     public class Game
     {
         public Board board;
+        public ConsoleIO console;
 
         private bool turn = true;
-        private ConsoleIO console;
         private bool gameOver = false;
         private bool tie = false;
 
@@ -121,6 +121,23 @@ namespace TicTacToe
             }
             int[][] diagonalWins = new int[][] { leftDiag, rightDiag };
             return diagonalWins;
+        }
+
+        public bool HasWinner()
+        {
+            return IsHorizontalWin(true)
+                || IsVerticalWin(true)
+                || IsDiagonalWin(true)
+                || IsHorizontalWin(false)
+                || IsVerticalWin(false)
+                || IsDiagonalWin(false);
+        }
+
+        public bool HasWinner(bool turn)
+        {
+            return IsHorizontalWin(turn)
+                || IsVerticalWin(turn)
+                || IsDiagonalWin(turn);
         }
 
         public bool IsGameOver(bool turn)
