@@ -19,7 +19,7 @@ namespace TicTacToe
             game.board.SetBoard(boardArray);
             if (game.HasWinner())
             {
-                return -10 * ((boardArray.Length + 10) - depth);
+                return -10 * (boardArray.Length - depth);
             }
             else if (game.IsTie())
             {
