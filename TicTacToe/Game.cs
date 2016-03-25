@@ -7,6 +7,7 @@ namespace TicTacToe
     {
         public Board board;
         public ConsoleIO console;
+
         private IPlayer player2 = new ComputerPlayer();
         private bool turn = true;
         private bool gameOver = false;
@@ -27,8 +28,8 @@ namespace TicTacToe
 
         public void StartGame()
         {
-            bool playAgain;
             IUserInput input = new ConsoleInput();
+            bool playAgain;
             console.DisplayWelcomeMessage();
             do
             {
