@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace TicTacToe
@@ -8,7 +7,7 @@ namespace TicTacToe
     {
         public Board board;
         public ConsoleIO console;
-
+        private IPlayer player2 = new ComputerPlayer();
         private bool turn = true;
         private bool gameOver = false;
         private bool tie = false;
@@ -62,8 +61,7 @@ namespace TicTacToe
             }
             else
             {
-                ComputerPlayer computer = new ComputerPlayer(this);
-                selection = computer.negamax(board.GetBoardArray(), turn, 0, new Dictionary<string, int>());
+                selection = player2.GetMove(this);
             }
             Move(selection, turn);
             turn = !turn;

@@ -4,14 +4,23 @@ using System.Linq;
 
 namespace TicTacToe
 {
-    public class ComputerPlayer
+    public class ComputerPlayer : IPlayer
     {
         private Game game;
 
-        public ComputerPlayer(Game game)
+        public ComputerPlayer()
+        {
+        }
+
+        public int GetMove(Game activeGame)
         {
             this.game = new Game();
-            this.game.board.SetBoard(game.board.GetBoardArray());
+            this.game.board.SetBoard(activeGame.board.GetBoardArray());
+            Dictionary<string, int> emptyDict = new Dictionary<string, int>();
+            string[] boardArray = activeGame.board.GetBoardArray();
+            this.game.board.SetBoard(boardArray);
+            int move = negamax(boardArray, false, 0, new Dictionary<string, int>());
+            return move;
         }
 
         public int negamax(string[] boardArray, bool turn, int depth, Dictionary<String, int> moveValues)
@@ -19,27 +28,37 @@ namespace TicTacToe
             game.board.SetBoard(boardArray);
             if (game.HasWinner())
             {
-                return -10 * (boardArray.Length - depth);
+                return ScoreWithDepthModifier(boardArray, depth);
             }
             else if (game.IsTie())
             {
                 return 0;
             }
             PlayOpenMoves(boardArray, turn, depth, moveValues);
-            string keyOfMaxValue = GetKeyOfHighestValue(moveValues);
+
             if (depth == 0)
             {
-                return int.Parse(keyOfMaxValue);
+                return int.Parse(GetKeyOfHighestValue(moveValues));
             }
             else
             {
-                return moveValues[keyOfMaxValue];
+                return GetHighestValue(moveValues);
             }
+        }
+
+        private static int ScoreWithDepthModifier(string[] boardArray, int depth)
+        {
+            return -10 * (boardArray.Length - depth);
         }
 
         private static string GetKeyOfHighestValue(Dictionary<string, int> moveValues)
         {
             return moveValues.FirstOrDefault(x => x.Value == moveValues.Values.Max()).Key;
+        }
+
+        private static int GetHighestValue(Dictionary<string, int> moveValues)
+        {
+            return moveValues.FirstOrDefault(x => x.Value == moveValues.Values.Max()).Value;
         }
 
         private void PlayOpenMoves(string[] boardArray, bool turn, int depth, Dictionary<string, int> moveValues)

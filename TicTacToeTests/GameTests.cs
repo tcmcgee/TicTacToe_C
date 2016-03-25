@@ -42,14 +42,13 @@ namespace TicTacToe.Tests
             Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
         }
 
-        //[TestMethod()]
+        [TestMethod()]
         public void TwoTurnTest()
         {
             Game game = new Game();
-            string[] gameBoard = { "X", "O", null, null, null, null, null, null, null };
-
+            string[] gameBoard = { "X", null, null, null, "O", null, null, null, null };
             game.Turn(new MockedInput("1"));
-            game.Turn(new MockedInput("2"));
+            game.Turn(new MockedInput("COMPUTER TURN"));
 
             Assert.AreEqual(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
         }
@@ -72,14 +71,14 @@ namespace TicTacToe.Tests
             Assert.IsFalse(game.board.GetBoardArray()[4] == "O");
         }
 
-        // [TestMethod()]
+        [TestMethod()]
         public void CorrectPieceOTest()
         {
             Game game = new Game();
-            game.Turn(new MockedInput("5"));
-            game.Turn(new MockedInput("7"));
+            game.Turn(new MockedInput("1"));
+            game.Turn(new MockedInput("COMPUTER TURN"));
 
-            Assert.AreEqual(game.board.GetBoardArray()[6], "O");
+            Assert.AreEqual(game.board.GetBoardArray()[4], "O");
         }
 
         [TestMethod()]

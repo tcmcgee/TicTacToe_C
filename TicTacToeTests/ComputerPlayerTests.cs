@@ -13,8 +13,8 @@ namespace TicTacToe.Tests
             game.board.SetBoard(new string[] {"X","X",null,
                                               "O",null,null,
                                              null, null, "X"});
-            ComputerPlayer computer = new ComputerPlayer(game);
-            int move = computer.negamax(game.board.GetBoardArray(), true, 0, new Dictionary<string, int>());
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
 
             Assert.AreEqual(2, move);
         }
@@ -26,8 +26,8 @@ namespace TicTacToe.Tests
             game.board.SetBoard(new string[] {"X","X",null,
                                               "O",null,null,
                                              null, null, "O"});
-            ComputerPlayer computer = new ComputerPlayer(game);
-            int move = computer.negamax(game.board.GetBoardArray(), false, 0, new Dictionary<string, int>());
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
 
             Assert.AreEqual(2, move);
         }
@@ -39,8 +39,8 @@ namespace TicTacToe.Tests
             game.board.SetBoard(new string[] {null,null,null,
                                               null,null,null,
                                              null, null, null});
-            ComputerPlayer computer = new ComputerPlayer(game);
-            int move = computer.negamax(game.board.GetBoardArray(), false, 0, new Dictionary<string, int>());
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
 
             Assert.AreEqual(0, move);
         }
@@ -52,8 +52,8 @@ namespace TicTacToe.Tests
             game.board.SetBoard(new string[] {"X",null,null,
                                               null,null,null,
                                              null, null, null});
-            ComputerPlayer computer = new ComputerPlayer(game);
-            int move = computer.negamax(game.board.GetBoardArray(), false, 0, new Dictionary<string, int>());
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
 
             Assert.AreEqual(4, move);
         }
@@ -76,6 +76,7 @@ namespace TicTacToe.Tests
 
         public bool PlayAllGames(Game game, string[] boardArray, bool turn)
         {
+            ComputerPlayer computer = new ComputerPlayer();
             game.board.SetBoard(boardArray);
             bool over = false;
             if (game.HasWinner(true))
@@ -114,7 +115,7 @@ namespace TicTacToe.Tests
                 }
                 else
                 {
-                    int move = new ComputerPlayer(game).negamax(boardArray, false, 0, new Dictionary<string, int>());
+                    int move = computer.GetMove(game);
                     boardArrayClone[move] = "O";
                     if (!PlayAllGames(game, boardArrayClone, !turn))
                     {
