@@ -21,9 +21,64 @@ namespace TicTacToe
 
         public string GetBoardString(Board b)
         {
+            string[] boardArray = b.GetBoardArray();
             StringBuilder builder = new StringBuilder();
-            builder.AppendFormat("_{0}_|_{1}_|_{2}_\n_{3}_|_{4}_|_{5}_\n {6} | {7} | {8} ", b.GetStringBoardArray());
+
+            string formatString = BoardStringFormat(boardArray);
+            builder.AppendFormat(formatString, b.GetStringBoardArray());
             return builder.ToString();
+        }
+
+        private string BoardStringFormat(string[] boardArray)
+        {
+            int rowLength = (int)Math.Sqrt(boardArray.Length);
+            string formatString = "";
+            formatString = GenerateFormatString(rowLength, formatString);
+            return formatString;
+        }
+
+        private static string GenerateFormatString(int rowLength, string formatString)
+        {
+            int count = 0;
+            for (int row = 0; row < rowLength; row++)
+            {
+                for (int col = 0; col < rowLength; col++)
+                {
+                    formatString = AppendCharacterIndex(rowLength, formatString, count, row);
+                    formatString = AppendNewLineOrDivider(rowLength, formatString, col);
+                    count++;
+                }
+            }
+
+            return formatString;
+        }
+
+        private static string AppendNewLineOrDivider(int rowLength, string formatString, int col)
+        {
+            if (col == rowLength - 1)
+            {
+                formatString += "\n";
+            }
+            else
+            {
+                formatString += "|";
+            }
+
+            return formatString;
+        }
+
+        private static string AppendCharacterIndex(int rowLength, string formatString, int count, int row)
+        {
+            if (row != rowLength - 1)
+            {
+                formatString += "_{" + count + "}_";
+            }
+            else
+            {
+                formatString += " {" + count + "} ";
+            }
+
+            return formatString;
         }
 
         public string DisplayBoard(Board board)

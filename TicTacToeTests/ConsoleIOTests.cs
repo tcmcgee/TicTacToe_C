@@ -44,7 +44,7 @@ namespace TicTacToe.Tests
 
             emptyBoard.SetBoard(empty);
 
-            Assert.AreEqual(console.DisplayBoard(emptyBoard), "_ _|_ _|_ _\n_ _|_ _|_ _\n   |   |   ");
+            Assert.AreEqual(console.DisplayBoard(emptyBoard), "_ _|_ _|_ _\n_ _|_ _|_ _\n   |   |   \n");
         }
 
         [TestMethod()]
@@ -58,7 +58,7 @@ namespace TicTacToe.Tests
 
             b.SetBoard(board);
 
-            Assert.AreEqual(console.DisplayBoard(b), "_X_|_ _|_ _\n_ _|_ _|_ _\n   |   |   ");
+            Assert.AreEqual(console.DisplayBoard(b), "_X_|_ _|_ _\n_ _|_ _|_ _\n   |   |   \n");
         }
 
         [TestMethod()]
@@ -72,7 +72,7 @@ namespace TicTacToe.Tests
 
             b.SetBoard(board);
 
-            Assert.AreEqual(console.DisplayBoard(b), "_X_|_O_|_X_\n_O_|_X_|_O_\n X | O | X ");
+            Assert.AreEqual(console.DisplayBoard(b), "_X_|_O_|_X_\n_O_|_X_|_O_\n X | O | X \n");
         }
 
         [TestMethod()]
@@ -82,7 +82,7 @@ namespace TicTacToe.Tests
 
             string message = console.DisplayHelp();
 
-            Assert.AreEqual(message, "\nPlease reference the board as follows:_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 ");
+            Assert.AreEqual(message, "\nPlease reference the board as follows:_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n");
         }
 
         [TestMethod()]
