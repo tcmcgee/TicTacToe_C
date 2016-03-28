@@ -14,7 +14,7 @@ namespace TicTacToe
 
         public int GetMove(Game activeGame)
         {
-            this.game = new Game();
+            this.game = new Game(activeGame.board.GetBoardArray().Length);
             this.game.board.SetBoard(activeGame.board.GetBoardArray());
             Dictionary<string, int> emptyDict = new Dictionary<string, int>();
             string[] boardArray = activeGame.board.GetBoardArray();
@@ -26,6 +26,7 @@ namespace TicTacToe
         public int negamax(string[] boardArray, bool turn, int depth, Dictionary<String, int> moveValues)
         {
             game.board.SetBoard(boardArray);
+
             if (game.HasWinner())
             {
                 return ScoreWithDepthModifier(boardArray, depth);
@@ -33,6 +34,11 @@ namespace TicTacToe
             else if (game.IsTie())
             {
                 return 0;
+            }
+            else if (IsFourByFour(boardArray) && depth >= 5)
+            {
+                Random generator = new Random();
+                return (int)(generator.NextDouble() * 5);
             }
             PlayOpenMoves(boardArray, turn, depth, moveValues);
 
@@ -44,6 +50,11 @@ namespace TicTacToe
             {
                 return GetHighestValue(moveValues);
             }
+        }
+
+        private static bool IsFourByFour(string[] boardArray)
+        {
+            return boardArray.Length == 16;
         }
 
         private static int ScoreWithDepthModifier(string[] boardArray, int depth)

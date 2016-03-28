@@ -78,13 +78,13 @@ namespace TicTacToe.Tests
             ComputerPlayer computer = new ComputerPlayer();
             game.board.SetBoard(boardArray);
             bool over = false;
-            if (game.HasWinner(true))
+            if (game.IsWinner(true))
             {
                 game.console.DisplayBoard(game.board);
                 over = true;
                 return false;
             }
-            if (game.HasWinner(false))
+            if (game.IsWinner(false))
             {
                 over = true;
             }

@@ -80,9 +80,42 @@ namespace TicTacToe.Tests
         {
             ConsoleIO console = new ConsoleIO(new MockedOutput());
 
-            string message = console.DisplayHelp();
+            string message = console.DisplayHelp(new Board());
 
             Assert.AreEqual(message, "\nPlease reference the board as follows:_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n");
+        }
+
+        [TestMethod()]
+        public void DisplayEmptyLargeBoardTest()
+        {
+            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            Board board = new Board();
+            board.SetBoard(new string[] { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null });
+            string message = console.DisplayBoard(board);
+
+            Assert.AreEqual("_ _|_ _|_ _|_ _\n_ _|_ _|_ _|_ _\n_ _|_ _|_ _|_ _\n   |   |   |   \n", message);
+        }
+
+        [TestMethod()]
+        public void DisplayFullLargeBoardTest()
+        {
+            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            Board board = new Board();
+            board.SetBoard(new string[] { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
+            string message = console.DisplayBoard(board);
+
+            Assert.AreEqual("_X_|_X_|_X_|_X_\n_X_|_X_|_X_|_X_\n_X_|_X_|_X_|_X_\n X | X | X | X \n", message);
+        }
+
+        [TestMethod()]
+        public void DisplayLargeBoardHelpTest()
+        {
+            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            Board board = new Board();
+            board.SetBoard(new string[] { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null });
+            string message = console.DisplayHelp(board);
+
+            Assert.AreEqual("\nPlease reference the board as follows:_1_|_2_|_3_|_4_\n_5_|_6_|_7_|_8_\n_9_|_10_|_11_|_12_\n 13 | 14 | 15 | 16 \n", message);
         }
 
         [TestMethod()]

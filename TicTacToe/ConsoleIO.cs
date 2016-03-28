@@ -89,16 +89,28 @@ namespace TicTacToe
             return stringBoard;
         }
 
-        public string DisplayHelp()
+        public string DisplayHelp(Board b)
         {
+            int boardLength = b.GetBoardArray().Length;
             Board sampleBoard = new Board();
-            sampleBoard.SetBoard(new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+
+            sampleBoard.SetBoard(GetIndexArray(boardLength));
             string message = "\nPlease reference the board as follows:";
 
             output.Display(message);
             message += DisplayBoard(sampleBoard);
             output.Display("");
             return message;
+        }
+
+        private string[] GetIndexArray(int boardLength)
+        {
+            string[] indexArray = new string[boardLength];
+            for (int i = 0; i < boardLength; i++)
+            {
+                indexArray[i] = (i + 1).ToString();
+            }
+            return indexArray;
         }
 
         public string DisplayGameOverMessage(bool winnerTurn, bool tie)
@@ -160,7 +172,7 @@ namespace TicTacToe
             bool done = false;
             while (done == false)
             {
-                selection = GetUserInput(input, "\nEnter the number corresponding with your move! (1-9): ", 1, 9);
+                selection = GetUserInput(input, "\nEnter the number corresponding with your move! (1-" + boardArray.Length + "): ", 1, boardArray.Length);
                 done = (boardArray[selection - 1] == null);
                 if (done == false)
                 {

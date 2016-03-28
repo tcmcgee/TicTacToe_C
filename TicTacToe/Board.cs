@@ -3,11 +3,25 @@
     public class Board
     {
         private string[] emptyBoard = { null, null, null, null, null, null, null, null, null };
+        private string[] emptyLargeBoard = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
+
         private string[] board;
 
         public Board()
         {
             this.board = emptyBoard;
+        }
+
+        public Board(int size)
+        {
+            if (size == 9)
+            {
+                this.board = emptyBoard;
+            }
+            else
+            {
+                SetBoard(emptyLargeBoard);
+            }
         }
 
         public void SetBoard(string[] newBoard)

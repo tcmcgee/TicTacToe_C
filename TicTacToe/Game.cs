@@ -10,6 +10,7 @@ namespace TicTacToe
 
         private IPlayer player2 = new ComputerPlayer();
         private bool turn = true;
+
         private bool gameOver = false;
         private bool tie = false;
 
@@ -19,22 +20,34 @@ namespace TicTacToe
 
         public Game()
         {
-            this.board = new Board();
+            board = new Board();
+            InitialSetup();
+        }
+
+        public Game(int boardSize)
+        {
+            board = new Board(boardSize);
+            InitialSetup();
+        }
+
+        private void InitialSetup()
+        {
             this.console = new ConsoleIO(new ConsoleOutput());
-            this.horizontalWins = GetHorizontalWins();
-            this.verticalWins = GetVerticalWins();
-            this.diagonalWins = GetDiagonalWins();
+            this.horizontalWins = GetHorizontalWins(board);
+            this.verticalWins = GetVerticalWins(board);
+            this.diagonalWins = GetDiagonalWins(board);
         }
 
         public void StartGame()
         {
             IUserInput input = new ConsoleInput();
             bool playAgain;
+
             console.DisplayWelcomeMessage();
             do
             {
                 ResetGame();
-                console.DisplayHelp();
+                console.DisplayHelp(board);
                 while (gameOver == false)
                 {
                     Turn(input);
@@ -68,7 +81,7 @@ namespace TicTacToe
             turn = !turn;
         }
 
-        public int[][] GetHorizontalWins()
+        public int[][] GetHorizontalWins(Board board)
         {
             int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
             int[][] horizontalWins = new int[rowLength][];
@@ -85,7 +98,7 @@ namespace TicTacToe
             return horizontalWins;
         }
 
-        public int[][] GetVerticalWins()
+        public int[][] GetVerticalWins(Board board)
         {
             int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
             int[][] verticalWins = new int[rowLength][];
@@ -97,14 +110,14 @@ namespace TicTacToe
                 for (int col = 0; col < rowLength; col++)
                 {
                     win[col] = count;
-                    count += 3;
+                    count += rowLength;
                 }
                 verticalWins[row] = win;
             }
             return verticalWins;
         }
 
-        public int[][] GetDiagonalWins()
+        public int[][] GetDiagonalWins(Board board)
         {
             int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
             int[] leftDiag = new int[rowLength];
@@ -132,7 +145,7 @@ namespace TicTacToe
                 || IsDiagonalWin(false);
         }
 
-        public bool HasWinner(bool turn)
+        public bool IsWinner(bool turn)
         {
             return IsHorizontalWin(turn)
                 || IsVerticalWin(turn)
@@ -201,7 +214,7 @@ namespace TicTacToe
         public void ResetGame()
         {
             tie = false;
-            board = new Board();
+            board = new Board(board.GetBoardArray().Length);
             gameOver = false;
             turn = true;
         }

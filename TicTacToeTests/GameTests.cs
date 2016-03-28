@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace TicTacToe.Tests
 {
@@ -267,9 +268,10 @@ namespace TicTacToe.Tests
             string[] gameBoard = { "X", "X", null,
                                    "O", null, "X",
                                    "X", "O", "X" };
-            game.board.SetBoard(gameBoard);
+            Board board = new Board();
+            board.SetBoard(gameBoard);
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetHorizontalWins()));
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetHorizontalWins(board)));
         }
 
         [TestMethod()]
@@ -280,9 +282,10 @@ namespace TicTacToe.Tests
             string[] gameBoard = { "X", "X", null,
                                    "O", null, "X",
                                    "X", "O", "X" };
-            game.board.SetBoard(gameBoard);
+            Board board = new Board();
+            board.SetBoard(gameBoard);
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetVerticalWins()));
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetVerticalWins(board)));
         }
 
         [TestMethod()]
@@ -293,9 +296,55 @@ namespace TicTacToe.Tests
             string[] gameBoard = { "X", "X", null,
                                    "O", null, "X",
                                    "X", "O", "X" };
-            game.board.SetBoard(gameBoard);
+            Board board = new Board();
+            board.SetBoard(gameBoard);
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetDiagonalWins()));
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetDiagonalWins(board)));
+        }
+
+        [TestMethod()]
+        public void GetsLargeBoardHorizontalWins()
+        {
+            Game game = new Game();
+            int[][] expectedWins = new int[][] { new int[] { 0, 1, 2, 3 }, new int[] { 4, 5, 6, 7 }, new int[] { 8, 9, 10, 11 }, new int[] { 12, 13, 14, 15 } };
+            string[] gameBoard = { "0",  "1",  "2", "3",
+                                   "4",  "5",  "6", "7",
+                                   "8",  "9",  "10","11",
+                                   "12", "13", "14","15"};
+            Board board = new Board();
+            board.SetBoard(gameBoard);
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetHorizontalWins(board)));
+        }
+
+        [TestMethod()]
+        public void GetsLargeBoardVerticalWins()
+        {
+            Game game = new Game();
+            int[][] expectedWins = new int[][] { new int[] { 0, 4, 8, 12 }, new int[] { 1, 5, 9, 13 }, new int[] { 2, 6, 10, 14 }, new int[] { 3, 7, 11, 15 } };
+            string[] gameBoard = { "0",  "1",  "2", "3",
+                                   "4",  "5",  "6", "7",
+                                   "8",  "9",  "10","11",
+                                   "12", "13", "14","15"};
+            Board board = new Board();
+            board.SetBoard(gameBoard);
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetVerticalWins(board)));
+        }
+
+        [TestMethod()]
+        public void GetsLargeBoardDiagonalWins()
+        {
+            Game game = new Game();
+            int[][] expectedWins = new int[][] { new int[] { 0, 5, 10, 15 }, new int[] { 3, 6, 9, 12 } };
+            string[] gameBoard = { "0",  "1",  "2", "3",
+                                   "4",  "5",  "6", "7",
+                                   "8",  "9",  "10","11",
+                                   "12", "13", "14","15"};
+            Board board = new Board();
+            board.SetBoard(gameBoard);
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetDiagonalWins(board)));
         }
 
         public bool IsEqualArrayOfInts(int[][] array1, int[][] array2)
@@ -306,12 +355,14 @@ namespace TicTacToe.Tests
                 {
                     if (array1[i].Length != array2[i].Length)
                     {
+                        Console.WriteLine(array1[i].Length + " - LENGTH - " + array2[i].Length);
                         return false;
                     }
                     for (int j = 0; j < array1[i].Length; j++)
                     {
                         if (array1[i][j] != array2[i][j])
                         {
+                            Console.WriteLine(array1[i][j] + " - != - " + array2[i][j]);
                             return false;
                         }
                     }
