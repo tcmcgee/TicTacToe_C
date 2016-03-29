@@ -30,7 +30,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayWelcomeMessageTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
             Assert.AreEqual(console.DisplayWelcomeMessage(), "Welcome to Tic Tac Toe!");
         }
@@ -38,8 +38,8 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayEmptyBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board emptyBoard = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
+            Board emptyBoard = new Board(9);
             string[] empty = { null, null, null, null, null, null, null, null, null };
 
             emptyBoard.SetBoard(empty);
@@ -50,8 +50,8 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayOccupiedBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board b = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
+            Board b = new Board(9);
             string[] board = { "X", null, null,
                               null, null, null,
                               null, null, null };
@@ -64,8 +64,8 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayFullBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board b = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
+            Board b = new Board(9);
             string[] board = { "X", "O", "X",
                                "O", "X", "O",
                                "X", "O", "X" };
@@ -78,9 +78,9 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayHelpTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
-            string message = console.DisplayHelp(new Board());
+            string message = console.DisplayHelp(new Board(9));
 
             Assert.AreEqual(message, "\nPlease reference the board as follows:_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n");
         }
@@ -88,8 +88,8 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayEmptyLargeBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board board = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
+            Board board = new Board(9);
             board.SetBoard(new string[] { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null });
             string message = console.DisplayBoard(board);
 
@@ -99,8 +99,8 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayFullLargeBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board board = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
+            Board board = new Board(16);
             board.SetBoard(new string[] { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
             string message = console.DisplayBoard(board);
 
@@ -110,8 +110,8 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayLargeBoardHelpTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board board = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
+            Board board = new Board(16);
             board.SetBoard(new string[] { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null });
             string message = console.DisplayHelp(board);
 
@@ -121,10 +121,10 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetPlayerMoveEmptyBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board b = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput("2"), new MockedOutput());
+            Board b = new Board(9);
 
-            int selection = console.GetPlayerMove(b, new MockedInput("2"));
+            int selection = console.GetPlayerMove(b);
 
             Assert.AreEqual(selection, 2);
         }
@@ -132,14 +132,14 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetPlayerMoveOccupiedBoardTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
-            Board b = new Board();
+            ConsoleIO console = new ConsoleIO(new MockedInput("6"), new MockedOutput());
+            Board b = new Board(9);
             string[] board = { "X", "O", "X",
                               null, null, null,
                               null, null, null };
 
             b.SetBoard(board);
-            int selection = console.GetPlayerMove(b, new MockedInput("6"));
+            int selection = console.GetPlayerMove(b);
 
             Assert.AreEqual(selection, 6);
         }
@@ -147,7 +147,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayGameOverMessageXWinTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
             Assert.AreEqual(console.DisplayGameOverMessage(true, false), "Game Over! X's Win!");
         }
@@ -155,7 +155,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayGameOverMessageOWinTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
             Assert.AreEqual(console.DisplayGameOverMessage(false, false), "Game Over! O's Win!");
         }
@@ -163,7 +163,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void DisplayGameOverMessageTieTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
             Assert.AreEqual(console.DisplayGameOverMessage(false, true), "Game Over! It's a Tie!");
         }
@@ -171,17 +171,17 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetPlayAgainTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
 
-            Assert.AreEqual(console.GetPlayAgain(new MockedInput("1")), true);
+            Assert.AreEqual(console.GetPlayAgain(), true);
         }
 
         [TestMethod()]
         public void GetNoPlayAgainTest()
         {
-            ConsoleIO console = new ConsoleIO(new MockedOutput());
+            ConsoleIO console = new ConsoleIO(new MockedInput("2"), new MockedOutput());
 
-            Assert.AreEqual(console.GetPlayAgain(new MockedInput("2")), false);
+            Assert.AreEqual(console.GetPlayAgain(), false);
         }
     }
 }

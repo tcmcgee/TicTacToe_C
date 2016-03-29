@@ -7,11 +7,6 @@
 
         private string[] board;
 
-        public Board()
-        {
-            this.board = emptyBoard;
-        }
-
         public Board(int size)
         {
             if (size == 9)

@@ -8,7 +8,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void ChoosesToWin()
         {
-            Game game = new Game();
+            Game game = new Game(9);
             game.board.SetBoard(new string[] {"X","X",null,
                                               "O",null,null,
                                              null, null, "X"});
@@ -21,7 +21,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void BlocksAnImmediateWin()
         {
-            Game game = new Game();
+            Game game = new Game(9);
             game.board.SetBoard(new string[] {"X","X",null,
                                               "O",null,null,
                                              null, null, "O"});
@@ -34,7 +34,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void TakesCornerIfFirst()
         {
-            Game game = new Game();
+            Game game = new Game(9);
             game.board.SetBoard(new string[] {null,null,null,
                                               null,null,null,
                                              null, null, null});
@@ -47,7 +47,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void TakesCenterIfSecond()
         {
-            Game game = new Game();
+            Game game = new Game(9);
             game.board.SetBoard(new string[] {"X",null,null,
                                               null,null,null,
                                              null, null, null});
@@ -60,7 +60,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void NeverLosesAGameIfItGoesSecond()
         {
-            Game game = new Game();
+            Game game = new Game(9);
 
             Assert.IsTrue(PlayAllGames(game, game.board.GetBoardArray(), true));
         }
@@ -68,9 +68,51 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void NeverLosesAGameIfItGoesFirst()
         {
-            Game game = new Game();
+            Game game = new Game(9);
 
             Assert.IsTrue(PlayAllGames(game, game.board.GetBoardArray(), false));
+        }
+
+        [TestMethod()]
+        public void BlocksAnImmediateLossLargeBoard()
+        {
+            Game game = new Game(16);
+            game.board.SetBoard(new string[] {"X","X","X",null,
+                                              "O",null,null,null,
+                                              null,"O",null,null,
+                                             null, null, null,null});
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
+
+            Assert.AreEqual(move, 3);
+        }
+
+        [TestMethod()]
+        public void BlocksAnImmediateDiagonalLossLargeBoard()
+        {
+            Game game = new Game(16);
+            game.board.SetBoard(new string[] {"X",null,null,null,
+                                              "O","X",null,null,
+                                              null,"O","X",null,
+                                             null, null, null,null});
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
+
+            Assert.AreEqual(move, 15);
+        }
+
+        [TestMethod()]
+        public void PrefersAnImmediateWinLargeBoard()
+        {
+            Game game = new Game(16);
+            game.board.SetBoard(new string[] {"X","X","X",null,
+                                              "O","O","O",null,
+                                              null,null,null,null,
+                                             null, null, null,"X"});
+            ComputerPlayer computer = new ComputerPlayer();
+            int move = computer.GetMove(game);
+
+            Assert.AreEqual(move, 7);
         }
 
         public bool PlayAllGames(Game game, string[] boardArray, bool turn)

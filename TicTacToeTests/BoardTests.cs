@@ -10,7 +10,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void SetBoardTest()
         {
-            Board b = new Board();
+            Board b = new Board(9);
             string[] newBoard = { "X", null, null, null, null, null, null, null, null };
 
             b.SetBoard(newBoard);
@@ -21,7 +21,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetEmptyBoardTest()
         {
-            Board b = new Board();
+            Board b = new Board(9);
 
             string[] currentBoard = b.GetBoardArray();
 
@@ -31,7 +31,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetFullBoardTest()
         {
-            Board b = new Board();
+            Board b = new Board(9);
             string[] newBoard = { "X", "O", "X", "O", "X", "O", "X", "O", "X" };
 
             b.SetBoard(newBoard);
@@ -43,7 +43,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetEmptyStringBoardArrayTest()
         {
-            Board b = new Board();
+            Board b = new Board(9);
 
             string[] stringBoard = b.GetStringBoardArray();
 
@@ -53,7 +53,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetOccupiedStringBoardArrayTest()
         {
-            Board b = new Board();
+            Board b = new Board(9);
             string[] newBoard = { "X", null, null, null, null, null, null, null, null };
 
             b.SetBoard(newBoard);
@@ -65,7 +65,7 @@ namespace TicTacToe.Tests
         [TestMethod()]
         public void GetFullStringBoardArrayTest()
         {
-            Board b = new Board();
+            Board b = new Board(9);
             string[] newBoard = { "X", "O", "X", "O", "X", "O", "X", "O", "X" };
 
             b.SetBoard(newBoard);

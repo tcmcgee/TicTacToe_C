@@ -18,12 +18,6 @@ namespace TicTacToe
         private int[][] verticalWins;
         private int[][] diagonalWins;
 
-        public Game()
-        {
-            board = new Board();
-            InitialSetup();
-        }
-
         public Game(int boardSize)
         {
             board = new Board(boardSize);
@@ -32,7 +26,7 @@ namespace TicTacToe
 
         private void InitialSetup()
         {
-            this.console = new ConsoleIO(new ConsoleOutput());
+            this.console = new ConsoleIO(new ConsoleInput(), new ConsoleOutput());
             this.horizontalWins = GetHorizontalWins(board);
             this.verticalWins = GetVerticalWins(board);
             this.diagonalWins = GetDiagonalWins(board);
@@ -50,11 +44,11 @@ namespace TicTacToe
                 console.DisplayHelp(board);
                 while (gameOver == false)
                 {
-                    Turn(input);
+                    Turn();
                 }
                 console.DisplayBoard(board);
                 console.DisplayGameOverMessage(!turn, tie);
-                playAgain = console.GetPlayAgain(new ConsoleInput());
+                playAgain = console.GetPlayAgain();
             } while (playAgain);
         }
 
@@ -66,12 +60,12 @@ namespace TicTacToe
             this.gameOver = IsGameOver(turn) ? true : false;
         }
 
-        public void Turn(IUserInput input)
+        public void Turn()
         {
             int selection;
             if (turn)
             {
-                selection = console.GetPlayerMove(board, input) - 1;
+                selection = console.GetPlayerMove(board) - 1;
             }
             else
             {

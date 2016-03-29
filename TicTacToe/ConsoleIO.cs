@@ -6,9 +6,11 @@ namespace TicTacToe
     public class ConsoleIO
     {
         private IUserOutput output;
+        private IUserInput input;
 
-        public ConsoleIO(IUserOutput output)
+        public ConsoleIO(IUserInput input, IUserOutput output)
         {
+            this.input = input;
             this.output = output;
         }
 
@@ -49,7 +51,6 @@ namespace TicTacToe
                     count++;
                 }
             }
-
             return formatString;
         }
 
@@ -77,7 +78,6 @@ namespace TicTacToe
             {
                 formatString += " {" + count + "} ";
             }
-
             return formatString;
         }
 
@@ -89,10 +89,10 @@ namespace TicTacToe
             return stringBoard;
         }
 
-        public string DisplayHelp(Board b)
+        public string DisplayHelp(Board board)
         {
-            int boardLength = b.GetBoardArray().Length;
-            Board sampleBoard = new Board();
+            int boardLength = board.GetBoardArray().Length;
+            Board sampleBoard = new Board(boardLength);
 
             sampleBoard.SetBoard(GetIndexArray(boardLength));
             string message = "\nPlease reference the board as follows:";
@@ -116,6 +116,14 @@ namespace TicTacToe
         public string DisplayGameOverMessage(bool winnerTurn, bool tie)
         {
             string message;
+            message = GetGameOverMessage(winnerTurn, tie);
+            output.Display(message);
+            return message;
+        }
+
+        private static string GetGameOverMessage(bool winnerTurn, bool tie)
+        {
+            string message;
             if (tie)
             {
                 message = "Game Over! It's a Tie!";
@@ -132,11 +140,11 @@ namespace TicTacToe
             {
                 message = String.Empty;
             }
-            output.Display(message);
+
             return message;
         }
 
-        public int GetUserInput(IUserInput input, string message, int low, int high)
+        public int GetUserInput(string message, int low, int high)
         {
             bool valid = false;
             int selection = -1;
@@ -164,7 +172,7 @@ namespace TicTacToe
             return selection;
         }
 
-        public int GetPlayerMove(Board board, IUserInput input)
+        public int GetPlayerMove(Board board)
         {
             string[] boardArray = board.GetBoardArray();
             DisplayBoard(board);
@@ -172,7 +180,7 @@ namespace TicTacToe
             bool done = false;
             while (done == false)
             {
-                selection = GetUserInput(input, "\nEnter the number corresponding with your move! (1-" + boardArray.Length + "): ", 1, boardArray.Length);
+                selection = GetUserInput("\nEnter the number corresponding with your move! (1-" + boardArray.Length + "): ", 1, boardArray.Length);
                 done = (boardArray[selection - 1] == null);
                 if (done == false)
                 {
@@ -182,9 +190,9 @@ namespace TicTacToe
             return selection;
         }
 
-        public bool GetPlayAgain(IUserInput input)
+        public bool GetPlayAgain()
         {
-            int selection = GetUserInput(input, "Would you like to play again?\n1.Yes\n2.No", 1, 2);
+            int selection = GetUserInput("Would you like to play again?\n1.Yes\n2.No", 1, 2);
             return selection == 1 ? true : false;
         }
     }
