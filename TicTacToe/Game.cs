@@ -7,8 +7,10 @@ namespace TicTacToe
     {
         public Board board;
         public ConsoleIO console;
-
-        private IPlayer player2 = new ComputerPlayer();
+        private IPlayer player1;
+        private IPlayer player2;
+        private IPlayer HumanPlayer = new HumanPlayer();
+        private IPlayer ComputerPlayer = new ComputerPlayer();
         private bool turn = true;
 
         private bool gameOver = false;
@@ -21,11 +23,19 @@ namespace TicTacToe
         public Game(int boardSize)
         {
             board = new Board(boardSize);
-            InitialSetup();
+            InitialSetup(new HumanPlayer(), new ComputerPlayer());
         }
 
-        private void InitialSetup()
+        public Game(int boardSize, IPlayer player1, IPlayer player2)
         {
+            board = new Board(boardSize);
+            InitialSetup(player1, player2);
+        }
+
+        private void InitialSetup(IPlayer player1, IPlayer player2)
+        {
+            this.player1 = player1;
+            this.player2 = player2;
             this.console = new ConsoleIO(new ConsoleInput(), new ConsoleOutput());
             this.horizontalWins = GetHorizontalWins(board);
             this.verticalWins = GetVerticalWins(board);
@@ -34,22 +44,30 @@ namespace TicTacToe
 
         public void StartGame()
         {
-            IUserInput input = new ConsoleInput();
             bool playAgain;
-
             console.DisplayWelcomeMessage();
             do
             {
-                ResetGame();
-                console.DisplayHelp(board);
+                GameSetup();
                 while (gameOver == false)
                 {
                     Turn();
                 }
-                console.DisplayBoard(board);
-                console.DisplayGameOverMessage(!turn, tie);
-                playAgain = console.GetPlayAgain();
+                playAgain = GameTearDown();
             } while (playAgain);
+        }
+
+        private bool GameTearDown()
+        {
+            console.DisplayBoard(board);
+            console.DisplayGameOverMessage(!turn, tie);
+            return console.GetPlayAgain();
+        }
+
+        private void GameSetup()
+        {
+            ResetGame();
+            console.DisplayHelp(board);
         }
 
         public void Move(int selection, bool turn)
@@ -65,7 +83,7 @@ namespace TicTacToe
             int selection;
             if (turn)
             {
-                selection = console.GetPlayerMove(board) - 1;
+                selection = player1.GetMove(this);
             }
             else
             {

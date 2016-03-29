@@ -38,6 +38,7 @@ namespace TicTacToe
             {
                 return GetRandomValue();
             }
+
             PlayOpenMoves(boardArray, turn, depth, moveValues);
 
             if (depth == 0)
