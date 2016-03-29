@@ -55,6 +55,7 @@
     <Compile Include="ComputerPlayerTests.cs" />
     <Compile Include="ConsoleIOTests.cs" />
     <Compile Include="GameTests.cs" />
+    <Compile Include="HumanPlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

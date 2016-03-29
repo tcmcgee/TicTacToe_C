@@ -267,60 +267,6 @@ namespace TicTacToe.Tests
             Assert.IsTrue(IsEqualBoard(game.board.GetBoardArray(), emptyBoard));
         }
 
-        [TestMethod()]
-        public void GetsHorizontalWins()
-        {
-            Game game = new Game(9);
-            int[][] expectedWins = new int[][] { new int[] { 0, 1, 2 }, new int[] { 3, 4, 5 }, new int[] { 6, 7, 8 } };
-
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetHorizontalWins(game.board)));
-        }
-
-        [TestMethod()]
-        public void GetsVerticalWins()
-        {
-            Game game = new Game(9);
-            int[][] expectedWins = new int[][] { new int[] { 0, 3, 6 }, new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 } };
-
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetVerticalWins(game.board)));
-        }
-
-        [TestMethod()]
-        public void GetsDiagonalWins()
-        {
-            Game game = new Game(9);
-            int[][] expectedWins = new int[][] { new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 } };
-
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetDiagonalWins(game.board)));
-        }
-
-        [TestMethod()]
-        public void GetsLargeBoardHorizontalWins()
-        {
-            Game game = new Game(16);
-            int[][] expectedWins = new int[][] { new int[] { 0, 1, 2, 3 }, new int[] { 4, 5, 6, 7 }, new int[] { 8, 9, 10, 11 }, new int[] { 12, 13, 14, 15 } };
-
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetHorizontalWins(game.board)));
-        }
-
-        [TestMethod()]
-        public void GetsLargeBoardVerticalWins()
-        {
-            Game game = new Game(16);
-            int[][] expectedWins = new int[][] { new int[] { 0, 4, 8, 12 }, new int[] { 1, 5, 9, 13 }, new int[] { 2, 6, 10, 14 }, new int[] { 3, 7, 11, 15 } };
-
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetVerticalWins(game.board)));
-        }
-
-        [TestMethod()]
-        public void GetsLargeBoardDiagonalWins()
-        {
-            Game game = new Game(16);
-            int[][] expectedWins = new int[][] { new int[] { 0, 5, 10, 15 }, new int[] { 3, 6, 9, 12 } };
-
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, game.GetDiagonalWins(game.board)));
-        }
-
         public bool IsEqualArrayOfInts(int[][] array1, int[][] array2)
         {
             if (array1.Length == array2.Length)

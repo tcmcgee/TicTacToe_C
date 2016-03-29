@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace TicTacToe.Tests
 {
@@ -72,6 +73,88 @@ namespace TicTacToe.Tests
             string[] stringBoard = b.GetStringBoardArray();
 
             Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { "X", "O", "X", "O", "X", "O", "X", "O", "X" }));
+        }
+
+        [TestMethod()]
+        public void GetsHorizontalWins()
+        {
+            Board board = new Board(9);
+            int[][] expectedWins = new int[][] { new int[] { 0, 1, 2 }, new int[] { 3, 4, 5 }, new int[] { 6, 7, 8 } };
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetHorizontalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsVerticalWins()
+        {
+            Board board = new Board(9);
+            int[][] expectedWins = new int[][] { new int[] { 0, 3, 6 }, new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 } };
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetVerticalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsDiagonalWins()
+        {
+            Board board = new Board(9);
+            int[][] expectedWins = new int[][] { new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 } };
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetDiagonalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsLargeBoardHorizontalWins()
+        {
+            Board board = new Board(16);
+            int[][] expectedWins = new int[][] { new int[] { 0, 1, 2, 3 }, new int[] { 4, 5, 6, 7 }, new int[] { 8, 9, 10, 11 }, new int[] { 12, 13, 14, 15 } };
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetHorizontalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsLargeBoardVerticalWins()
+        {
+            Board board = new Board(16);
+            int[][] expectedWins = new int[][] { new int[] { 0, 4, 8, 12 }, new int[] { 1, 5, 9, 13 }, new int[] { 2, 6, 10, 14 }, new int[] { 3, 7, 11, 15 } };
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetVerticalWins()));
+        }
+
+        [TestMethod()]
+        public void GetsLargeBoardDiagonalWins()
+        {
+            Board board = new Board(16);
+            int[][] expectedWins = new int[][] { new int[] { 0, 5, 10, 15 }, new int[] { 3, 6, 9, 12 } };
+
+            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetDiagonalWins()));
+        }
+
+        public bool IsEqualArrayOfInts(int[][] array1, int[][] array2)
+        {
+            if (array1.Length == array2.Length)
+            {
+                for (int i = 0; i < array1.Length; i++)
+                {
+                    if (array1[i].Length != array2[i].Length)
+                    {
+                        Console.WriteLine(array1[i].Length + " - LENGTH - " + array2[i].Length);
+                        return false;
+                    }
+                    for (int j = 0; j < array1[i].Length; j++)
+                    {
+                        if (array1[i][j] != array2[i][j])
+                        {
+                            Console.WriteLine(array1[i][j] + " - != - " + array2[i][j]);
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return true;
         }
 
         public bool IsEqualBoard(string[] board1, string[] board2)

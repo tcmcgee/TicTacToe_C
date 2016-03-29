@@ -37,9 +37,9 @@ namespace TicTacToe
             this.player1 = player1;
             this.player2 = player2;
             this.console = new ConsoleIO(new ConsoleInput(), new ConsoleOutput());
-            this.horizontalWins = GetHorizontalWins(board);
-            this.verticalWins = GetVerticalWins(board);
-            this.diagonalWins = GetDiagonalWins(board);
+            this.horizontalWins = board.GetHorizontalWins();
+            this.verticalWins = board.GetVerticalWins();
+            this.diagonalWins = board.GetDiagonalWins();
         }
 
         public void StartGame()
@@ -91,60 +91,6 @@ namespace TicTacToe
             }
             Move(selection, turn);
             turn = !turn;
-        }
-
-        public int[][] GetHorizontalWins(Board board)
-        {
-            int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
-            int[][] horizontalWins = new int[rowLength][];
-            int count = 0;
-            for (int row = 0; row < rowLength; row++)
-            {
-                int[] win = new int[rowLength];
-                for (int col = 0; col < rowLength; col++)
-                {
-                    win[col] = count++;
-                }
-                horizontalWins[row] = win;
-            }
-            return horizontalWins;
-        }
-
-        public int[][] GetVerticalWins(Board board)
-        {
-            int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
-            int[][] verticalWins = new int[rowLength][];
-            int count = 0;
-            for (int row = 0; row < rowLength; row++)
-            {
-                int[] win = new int[rowLength];
-                count = row;
-                for (int col = 0; col < rowLength; col++)
-                {
-                    win[col] = count;
-                    count += rowLength;
-                }
-                verticalWins[row] = win;
-            }
-            return verticalWins;
-        }
-
-        public int[][] GetDiagonalWins(Board board)
-        {
-            int rowLength = (int)Math.Sqrt(board.GetBoardArray().Length);
-            int[] leftDiag = new int[rowLength];
-            int[] rightDiag = new int[rowLength];
-            int left = 0;
-            int right = rowLength - 1;
-            for (int i = 0; i < rowLength; i++)
-            {
-                leftDiag[i] = left;
-                rightDiag[i] = right;
-                left += rowLength + 1;
-                right += rowLength - 1;
-            }
-            int[][] diagonalWins = new int[][] { leftDiag, rightDiag };
-            return diagonalWins;
         }
 
         public bool HasWinner()
