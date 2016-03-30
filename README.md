@@ -15,9 +15,9 @@ mono TTT.exe
 
 # Option 1
 
-Open TicTacToe.sln file in Visual studio where you can modify, compile and execute the code
+Open TicTacToe.sln file in Visual studio where you can modify, compile and execute the code or Simply
 
 # Option 2
 
-Using MSBuild or Visual Studio Command Prompt
+Simply launch the included .exe!
 
