@@ -25,7 +25,7 @@
         public static void Main(string[] args)
 
         {
-            Game game = StartGame.FourByFourVsComputer();
+            Game game = StartGame.ThreeByThreeVsComputer();
             game.StartGame();
         }
     }

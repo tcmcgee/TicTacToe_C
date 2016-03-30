@@ -17,7 +17,7 @@ namespace TicTacToe.Tests
             Assert.AreEqual(4, selection);
         }
 
-        [TestMethod()]
+        //[TestMethod()]
         public void GetMoveLargeBoardTest()
         {
             HumanPlayer human = new HumanPlayer();
