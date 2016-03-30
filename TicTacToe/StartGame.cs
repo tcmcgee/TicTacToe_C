@@ -2,30 +2,20 @@
 {
     internal class StartGame
     {
-        public static Game ThreeByThreeVsComputer()
+        public static Game BuildGame(ConsoleIO IO)
         {
-            return new Game(9, new HumanPlayer(), new ComputerPlayer());
-        }
-
-        public static Game ThreeByThreeVsHuman()
-        {
-            return new Game(9, new HumanPlayer(), new HumanPlayer());
-        }
-
-        public static Game FourByFourVsComputer()
-        {
-            return new Game(16, new HumanPlayer(), new ComputerPlayer());
-        }
-
-        public static Game FourByFourVsHuman()
-        {
-            return new Game(16, new HumanPlayer(), new HumanPlayer());
+            int boardSize = IO.GetBoardSize();
+            IPlayer player1 = IO.GetPlayerType(1);
+            IPlayer player2 = IO.GetPlayerType(2);
+            Game game = new Game(boardSize, player1, player2);
+            return game;
         }
 
         public static void Main(string[] args)
 
         {
-            Game game = StartGame.ThreeByThreeVsComputer();
+            ConsoleIO IO = new ConsoleIO(new ConsoleInput(), new ConsoleOutput());
+            Game game = BuildGame(IO);
             game.StartGame();
         }
     }

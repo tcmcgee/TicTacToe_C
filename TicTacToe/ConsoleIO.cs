@@ -195,5 +195,17 @@ namespace TicTacToe
             int selection = GetUserInput("Would you like to play again?\n1.Yes\n2.No", 1, 2);
             return selection == 1 ? true : false;
         }
+
+        public int GetBoardSize()
+        {
+            int selection = GetUserInput("What size board would you like to play on?\n1.3x3\n2.4x4", 1, 2);
+            return selection == 1 ? 9 : 16;
+        }
+
+        public IPlayer GetPlayerType(int playerNumber)
+        {
+            int selection = GetUserInput("What type of player is Player" + playerNumber + "?\n1.Human\n2.Computer", 1, 2);
+            return selection == 1 ? (IPlayer)new HumanPlayer() : (IPlayer)new ComputerPlayer();
+        }
     }
 }
