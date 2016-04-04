@@ -1,7 +1,9 @@
 language: csharp
-solution: solution-name.sln
+mono:
+  - latest
+solution: TicTacToe.sln
 install:
-  - nuget restore solution-name.sln
+  - nuget restore TicTacToe.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release TicTacToe.sln
