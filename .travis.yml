@@ -5,4 +5,4 @@ install:
   - nuget install xunit.runners -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release TicTacToe.sln
-  - mono ./testrunner/xunit.runners.*/tools/xunit.console.clr4.exe ./TicTacToeTests/bin/Release/TicTacToeTests.dll
+  - mono ./testrunner/xunit.runners*/tools/xunit.console.clr4.exe ./TicTacToeTests/bin/Release/TicTacToeTests.dll
