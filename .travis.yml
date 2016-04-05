@@ -1,7 +1,6 @@
 language: csharp
 mono:
   - latest
-solution: TicTacToe.sln
 install:
   - nuget restore TicTacToe.sln
   - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
