@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace TicTacToe.Tests
 {
@@ -24,18 +24,17 @@ namespace TicTacToe.Tests
         }
     }
 
-    [TestClass()]
     public class ConsoleIOTests
     {
-        [TestMethod()]
+        [Fact]
         public void DisplayWelcomeMessageTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
-            Assert.AreEqual(console.DisplayWelcomeMessage(), "Welcome to Tic Tac Toe!");
+            Assert.Equal(console.DisplayWelcomeMessage(), "Welcome to Tic Tac Toe!");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayEmptyBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
@@ -44,10 +43,10 @@ namespace TicTacToe.Tests
 
             emptyBoard.SetBoard(empty);
 
-            Assert.AreEqual(console.DisplayBoard(emptyBoard), "_ _|_ _|_ _\n_ _|_ _|_ _\n   |   |   \n");
+            Assert.Equal(console.DisplayBoard(emptyBoard), "_ _|_ _|_ _\n_ _|_ _|_ _\n   |   |   \n");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayOccupiedBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
@@ -58,10 +57,10 @@ namespace TicTacToe.Tests
 
             b.SetBoard(board);
 
-            Assert.AreEqual(console.DisplayBoard(b), "_X_|_ _|_ _\n_ _|_ _|_ _\n   |   |   \n");
+            Assert.Equal(console.DisplayBoard(b), "_X_|_ _|_ _\n_ _|_ _|_ _\n   |   |   \n");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayFullBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
@@ -72,20 +71,20 @@ namespace TicTacToe.Tests
 
             b.SetBoard(board);
 
-            Assert.AreEqual(console.DisplayBoard(b), "_X_|_O_|_X_\n_O_|_X_|_O_\n X | O | X \n");
+            Assert.Equal(console.DisplayBoard(b), "_X_|_O_|_X_\n_O_|_X_|_O_\n X | O | X \n");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayHelpTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
             string message = console.DisplayHelp(new Board(9));
 
-            Assert.AreEqual(message, "\nPlease reference the board as follows:_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n");
+            Assert.Equal(message, "\nPlease reference the board as follows:_1_|_2_|_3_\n_4_|_5_|_6_\n 7 | 8 | 9 \n");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayEmptyLargeBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
@@ -93,10 +92,10 @@ namespace TicTacToe.Tests
             board.SetBoard(new string[] { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null });
             string message = console.DisplayBoard(board);
 
-            Assert.AreEqual("_ _|_ _|_ _|_ _\n_ _|_ _|_ _|_ _\n_ _|_ _|_ _|_ _\n   |   |   |   \n", message);
+            Assert.Equal("_ _|_ _|_ _|_ _\n_ _|_ _|_ _|_ _\n_ _|_ _|_ _|_ _\n   |   |   |   \n", message);
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayFullLargeBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
@@ -104,10 +103,10 @@ namespace TicTacToe.Tests
             board.SetBoard(new string[] { "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X" });
             string message = console.DisplayBoard(board);
 
-            Assert.AreEqual("_X_|_X_|_X_|_X_\n_X_|_X_|_X_|_X_\n_X_|_X_|_X_|_X_\n X | X | X | X \n", message);
+            Assert.Equal("_X_|_X_|_X_|_X_\n_X_|_X_|_X_|_X_\n_X_|_X_|_X_|_X_\n X | X | X | X \n", message);
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayLargeBoardHelpTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
@@ -115,10 +114,10 @@ namespace TicTacToe.Tests
             board.SetBoard(new string[] { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null });
             string message = console.DisplayHelp(board);
 
-            Assert.AreEqual("\nPlease reference the board as follows:_1_|_2_|_3_|_4_\n_5_|_6_|_7_|_8_\n_9_|_10_|_11_|_12_\n 13 | 14 | 15 | 16 \n", message);
+            Assert.Equal("\nPlease reference the board as follows:_1_|_2_|_3_|_4_\n_5_|_6_|_7_|_8_\n_9_|_10_|_11_|_12_\n 13 | 14 | 15 | 16 \n", message);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetPlayerMoveEmptyBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput("2"), new MockedOutput());
@@ -126,10 +125,10 @@ namespace TicTacToe.Tests
 
             int selection = console.GetPlayerMove(b);
 
-            Assert.AreEqual(selection, 2);
+            Assert.Equal(selection, 2);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetPlayerMoveOccupiedBoardTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput("6"), new MockedOutput());
@@ -141,47 +140,47 @@ namespace TicTacToe.Tests
             b.SetBoard(board);
             int selection = console.GetPlayerMove(b);
 
-            Assert.AreEqual(selection, 6);
+            Assert.Equal(selection, 6);
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayGameOverMessageXWinTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
-            Assert.AreEqual(console.DisplayGameOverMessage(true, false), "Game Over! X's Win!");
+            Assert.Equal(console.DisplayGameOverMessage(true, false), "Game Over! X's Win!");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayGameOverMessageOWinTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
-            Assert.AreEqual(console.DisplayGameOverMessage(false, false), "Game Over! O's Win!");
+            Assert.Equal(console.DisplayGameOverMessage(false, false), "Game Over! O's Win!");
         }
 
-        [TestMethod()]
+        [Fact]
         public void DisplayGameOverMessageTieTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput(""), new MockedOutput());
 
-            Assert.AreEqual(console.DisplayGameOverMessage(false, true), "Game Over! It's a Tie!");
+            Assert.Equal(console.DisplayGameOverMessage(false, true), "Game Over! It's a Tie!");
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetPlayAgainTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
 
-            Assert.AreEqual(console.GetPlayAgain(), true);
+            Assert.Equal(console.GetPlayAgain(), true);
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetNoPlayAgainTest()
         {
             ConsoleIO console = new ConsoleIO(new MockedInput("2"), new MockedOutput());
 
-            Assert.AreEqual(console.GetPlayAgain(), false);
+            Assert.Equal(console.GetPlayAgain(), false);
         }
     }
 }

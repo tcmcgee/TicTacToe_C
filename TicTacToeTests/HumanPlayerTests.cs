@@ -1,11 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 
 namespace TicTacToe.Tests
 {
-    [TestClass()]
     public class HumanPlayerTests
     {
-        [TestMethod()]
+        [Fact]
         public void GetMoveSmallBoardTest()
         {
             HumanPlayer human = new HumanPlayer();
@@ -14,10 +13,10 @@ namespace TicTacToe.Tests
 
             int selection = human.GetMove(game);
 
-            Assert.AreEqual(4, selection);
+            Assert.Equal(4, selection);
         }
 
-        //[TestMethod()]
+        //[Fact]
         public void GetMoveLargeBoardTest()
         {
             HumanPlayer human = new HumanPlayer();
@@ -26,7 +25,7 @@ namespace TicTacToe.Tests
 
             int selection = human.GetMove(game);
 
-            Assert.AreEqual(15, selection);
+            Assert.Equal(15, selection);
         }
     }
 }

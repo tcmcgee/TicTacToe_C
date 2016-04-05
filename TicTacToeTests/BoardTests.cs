@@ -1,14 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿using System;
+using Xunit;
 
 namespace TicTacToe.Tests
 {
-    [TestClass()]
     public class BoardTests
     {
         private string[] emptyBoard = { null, null, null, null, null, null, null, null, null };
 
-        [TestMethod()]
+        [Fact]
         public void SetBoardTest()
         {
             Board b = new Board(9);
@@ -16,20 +15,20 @@ namespace TicTacToe.Tests
 
             b.SetBoard(newBoard);
 
-            Assert.IsTrue(IsEqualBoard(newBoard, b.GetBoardArray()));
+            Assert.True(IsEqualBoard(newBoard, b.GetBoardArray()));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetEmptyBoardTest()
         {
             Board b = new Board(9);
 
             string[] currentBoard = b.GetBoardArray();
 
-            Assert.IsTrue(IsEqualBoard(currentBoard, emptyBoard));
+            Assert.True(IsEqualBoard(currentBoard, emptyBoard));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetFullBoardTest()
         {
             Board b = new Board(9);
@@ -38,20 +37,20 @@ namespace TicTacToe.Tests
             b.SetBoard(newBoard);
             string[] currentBoard = b.GetBoardArray();
 
-            Assert.IsTrue(IsEqualBoard(currentBoard, newBoard));
+            Assert.True(IsEqualBoard(currentBoard, newBoard));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetEmptyStringBoardArrayTest()
         {
             Board b = new Board(9);
 
             string[] stringBoard = b.GetStringBoardArray();
 
-            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " " }));
+            Assert.True(IsEqualBoard(stringBoard, new string[] { " ", " ", " ", " ", " ", " ", " ", " ", " " }));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetOccupiedStringBoardArrayTest()
         {
             Board b = new Board(9);
@@ -60,10 +59,10 @@ namespace TicTacToe.Tests
             b.SetBoard(newBoard);
             string[] stringBoard = b.GetStringBoardArray();
 
-            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { "X", " ", " ", " ", " ", " ", " ", " ", " " }));
+            Assert.True(IsEqualBoard(stringBoard, new string[] { "X", " ", " ", " ", " ", " ", " ", " ", " " }));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetFullStringBoardArrayTest()
         {
             Board b = new Board(9);
@@ -72,61 +71,61 @@ namespace TicTacToe.Tests
             b.SetBoard(newBoard);
             string[] stringBoard = b.GetStringBoardArray();
 
-            Assert.IsTrue(IsEqualBoard(stringBoard, new string[] { "X", "O", "X", "O", "X", "O", "X", "O", "X" }));
+            Assert.True(IsEqualBoard(stringBoard, new string[] { "X", "O", "X", "O", "X", "O", "X", "O", "X" }));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetsHorizontalWins()
         {
             Board board = new Board(9);
             int[][] expectedWins = new int[][] { new int[] { 0, 1, 2 }, new int[] { 3, 4, 5 }, new int[] { 6, 7, 8 } };
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetHorizontalWins()));
+            Assert.True(IsEqualArrayOfInts(expectedWins, board.GetHorizontalWins()));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetsVerticalWins()
         {
             Board board = new Board(9);
             int[][] expectedWins = new int[][] { new int[] { 0, 3, 6 }, new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 } };
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetVerticalWins()));
+            Assert.True(IsEqualArrayOfInts(expectedWins, board.GetVerticalWins()));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetsDiagonalWins()
         {
             Board board = new Board(9);
             int[][] expectedWins = new int[][] { new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 } };
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetDiagonalWins()));
+            Assert.True(IsEqualArrayOfInts(expectedWins, board.GetDiagonalWins()));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetsLargeBoardHorizontalWins()
         {
             Board board = new Board(16);
             int[][] expectedWins = new int[][] { new int[] { 0, 1, 2, 3 }, new int[] { 4, 5, 6, 7 }, new int[] { 8, 9, 10, 11 }, new int[] { 12, 13, 14, 15 } };
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetHorizontalWins()));
+            Assert.True(IsEqualArrayOfInts(expectedWins, board.GetHorizontalWins()));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetsLargeBoardVerticalWins()
         {
             Board board = new Board(16);
             int[][] expectedWins = new int[][] { new int[] { 0, 4, 8, 12 }, new int[] { 1, 5, 9, 13 }, new int[] { 2, 6, 10, 14 }, new int[] { 3, 7, 11, 15 } };
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetVerticalWins()));
+            Assert.True(IsEqualArrayOfInts(expectedWins, board.GetVerticalWins()));
         }
 
-        [TestMethod()]
+        [Fact]
         public void GetsLargeBoardDiagonalWins()
         {
             Board board = new Board(16);
             int[][] expectedWins = new int[][] { new int[] { 0, 5, 10, 15 }, new int[] { 3, 6, 9, 12 } };
 
-            Assert.IsTrue(IsEqualArrayOfInts(expectedWins, board.GetDiagonalWins()));
+            Assert.True(IsEqualArrayOfInts(expectedWins, board.GetDiagonalWins()));
         }
 
         public bool IsEqualArrayOfInts(int[][] array1, int[][] array2)
