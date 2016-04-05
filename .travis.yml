@@ -8,4 +8,6 @@ script:
   - ls
   - cd TicTacToeTests
   - ls
+  - cd bin
+  - ls
   - mono ./testrunner/xunit.runners.1.9.2/tools/xunit.console.clr4.exe ./TicTacToeTests/bin/Release/TictacToeTests.dll
