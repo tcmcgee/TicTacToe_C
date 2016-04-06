@@ -1,7 +1,8 @@
 ﻿using System;
+using TicTacToe;
 using Xunit;
 
-namespace TicTacToe.Tests
+namespace TicTacToeTests
 {
     public class GameTests
     {

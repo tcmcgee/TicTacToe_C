@@ -1,6 +1,7 @@
-﻿using Xunit;
+﻿using TicTacToe;
+using Xunit;
 
-namespace TicTacToe.Tests
+namespace TicTacToeTests
 {
     internal class MockedInput : IUserInput
     {
