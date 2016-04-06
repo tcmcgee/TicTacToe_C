@@ -6,11 +6,9 @@ namespace TicTacToe
     public class Game
     {
         public Board board;
-        public ConsoleIO console;
+        public IIO IO;
         private IPlayer player1;
         private IPlayer player2;
-        private IPlayer HumanPlayer = new HumanPlayer();
-        private IPlayer ComputerPlayer = new ComputerPlayer();
         public bool turn = true;
 
         private bool gameOver = false;
@@ -26,9 +24,10 @@ namespace TicTacToe
             InitialSetup(new HumanPlayer(), new ComputerPlayer());
         }
 
-        public Game(int boardSize, IPlayer player1, IPlayer player2)
+        public Game(int boardSize, IPlayer player1, IPlayer player2, IIO IO)
         {
             board = new Board(boardSize);
+            this.IO = IO;
             InitialSetup(player1, player2);
         }
 
@@ -36,7 +35,6 @@ namespace TicTacToe
         {
             this.player1 = player1;
             this.player2 = player2;
-            this.console = new ConsoleIO(new ConsoleInput(), new ConsoleOutput());
             this.horizontalWins = board.GetHorizontalWins();
             this.verticalWins = board.GetVerticalWins();
             this.diagonalWins = board.GetDiagonalWins();
@@ -45,7 +43,7 @@ namespace TicTacToe
         public void StartGame()
         {
             bool playAgain;
-            console.DisplayWelcomeMessage();
+            IO.DisplayWelcomeMessage();
             do
             {
                 GameSetup();
@@ -59,15 +57,15 @@ namespace TicTacToe
 
         private bool GameTearDown()
         {
-            console.DisplayBoard(board);
-            console.DisplayGameOverMessage(!turn, tie);
-            return console.GetPlayAgain();
+            IO.DisplayBoard(board);
+            IO.DisplayGameOverMessage(!turn, tie);
+            return IO.GetPlayAgain();
         }
 
         private void GameSetup()
         {
             ResetGame();
-            console.DisplayHelp(board);
+            IO.DisplayHelp(board);
         }
 
         public void Move(int selection, bool turn)

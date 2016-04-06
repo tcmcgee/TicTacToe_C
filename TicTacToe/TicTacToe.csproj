@@ -76,6 +76,7 @@
     <Compile Include="ConsoleOutput.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="HumanPlayer.cs" />
+    <Compile Include="IIO.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="IUserOutput.cs" />
     <Compile Include="ConsoleInput.cs" />

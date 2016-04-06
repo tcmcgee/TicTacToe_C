@@ -5,10 +5,22 @@
         public static Game BuildGame(ConsoleIO IO)
         {
             int boardSize = IO.GetBoardSize();
-            IPlayer player1 = IO.GetPlayerType(1);
-            IPlayer player2 = IO.GetPlayerType(2);
-            Game game = new Game(boardSize, player1, player2);
+            IPlayer player1 = GetPlayer(IO.GetPlayerType(1));
+            IPlayer player2 = GetPlayer(IO.GetPlayerType(2));
+            Game game = new Game(boardSize, player1, player2, IO);
             return game;
+        }
+
+        public static IPlayer GetPlayer(bool IsHumanPlayer)
+        {
+            if (IsHumanPlayer)
+            {
+                return new HumanPlayer();
+            }
+            else
+            {
+                return new ComputerPlayer();
+            }
         }
 
         public static void Main(string[] args)

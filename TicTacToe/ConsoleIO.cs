@@ -3,10 +3,10 @@ using System.Text;
 
 namespace TicTacToe
 {
-    public class ConsoleIO
+    public class ConsoleIO : IIO
     {
-        private IUserOutput output;
-        private IUserInput input;
+        public IUserOutput output;
+        public IUserInput input;
 
         public ConsoleIO(IUserInput input, IUserOutput output)
         {
@@ -202,10 +202,10 @@ namespace TicTacToe
             return selection == 1 ? 9 : 16;
         }
 
-        public IPlayer GetPlayerType(int playerNumber)
+        public bool GetPlayerType(int playerNumber)
         {
             int selection = GetUserInput("What type of player is Player" + playerNumber + "?\n1.Human\n2.Computer", 1, 2);
-            return selection == 1 ? (IPlayer)new HumanPlayer() : (IPlayer)new ComputerPlayer();
+            return selection == 1;
         }
     }
 }

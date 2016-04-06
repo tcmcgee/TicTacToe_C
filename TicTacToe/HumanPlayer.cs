@@ -4,7 +4,7 @@
     {
         public int GetMove(Game activeGame)
         {
-            return activeGame.console.GetPlayerMove(activeGame.board) - 1;
+            return activeGame.IO.GetPlayerMove(activeGame.board) - 1;
         }
     }
 }

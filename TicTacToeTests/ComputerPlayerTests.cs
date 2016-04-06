@@ -122,7 +122,7 @@ namespace TicTacToeTests
             bool over = false;
             if (game.IsWinner(true))
             {
-                game.console.DisplayBoard(game.board);
+                game.IO.DisplayBoard(game.board);
                 over = true;
                 return false;
             }

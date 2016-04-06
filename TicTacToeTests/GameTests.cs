@@ -57,7 +57,7 @@ namespace TicTacToeTests
         {
             Game game = new Game(9);
             string[] gameBoard = { "X", null, null, null, null, null, null, null, null };
-            game.console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("1"), new MockedOutput());
             game.Turn();
 
             Assert.Equal(gameBoard, game.board.GetBoardArray());
@@ -68,7 +68,7 @@ namespace TicTacToeTests
         {
             Game game = new Game(16);
             string[] gameBoard = { "X", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
-            game.console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("1"), new MockedOutput());
             game.Turn();
 
             Assert.Equal(gameBoard, game.board.GetBoardArray());
@@ -79,7 +79,7 @@ namespace TicTacToeTests
         {
             Game game = new Game(16);
             string[] gameBoard = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "X" };
-            game.console = new ConsoleIO(new MockedInput("16"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("16"), new MockedOutput());
             game.Turn();
 
             Assert.Equal(gameBoard, game.board.GetBoardArray());
@@ -90,7 +90,7 @@ namespace TicTacToeTests
         {
             Game game = new Game(9);
             string[] gameBoard = { "X", null, null, null, "O", null, null, null, null };
-            game.console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("1"), new MockedOutput());
             game.Turn();
             game.Turn(); //Second Turn Computer Goes
 
@@ -101,7 +101,7 @@ namespace TicTacToeTests
         public void CorrectPieceXTest()
         {
             Game game = new Game(9);
-            game.console = new ConsoleIO(new MockedInput("5"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("5"), new MockedOutput());
             game.Turn();
 
             Assert.Equal(game.board.GetBoardArray()[4], "X");
@@ -111,7 +111,7 @@ namespace TicTacToeTests
         public void NotCorrectPieceOTest()
         {
             Game game = new Game(9);
-            game.console = new ConsoleIO(new MockedInput("5"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("5"), new MockedOutput());
             game.Turn();
 
             Assert.False(game.board.GetBoardArray()[4] == "O");
@@ -121,7 +121,7 @@ namespace TicTacToeTests
         public void CorrectPieceOTest()
         {
             Game game = new Game(9);
-            game.console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("1"), new MockedOutput());
             game.Turn();
             game.Turn();
 
@@ -135,7 +135,7 @@ namespace TicTacToeTests
             string[] gameBoard = { "X", "X", null, null, null, null, null, null, null };
 
             game.board.SetBoard(gameBoard);
-            game.console = new ConsoleIO(new MockedInput("3"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("3"), new MockedOutput());
             game.Turn();
 
             Assert.True(game.IsHorizontalWin(true));
@@ -160,7 +160,7 @@ namespace TicTacToeTests
             Game game = new Game(9);
             string[] gameBoard = { "X", "X", "O", "O", null, "O", null, null, null };
             game.board.SetBoard(gameBoard);
-            game.console = new ConsoleIO(new MockedInput("9"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("9"), new MockedOutput());
             game.Turn();
 
             Assert.False(game.IsHorizontalWin(false));
@@ -210,7 +210,7 @@ namespace TicTacToeTests
         public void IsNotShortCircuitDiagnolTest()
         {
             Game game = new Game(9);
-            game.console = new ConsoleIO(new MockedInput("2"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("2"), new MockedOutput());
             game.Turn();
 
             Assert.False(game.IsDiagonalWin(true));
@@ -318,7 +318,7 @@ namespace TicTacToeTests
                                     null, null, "O", "O",
                                     "X", "X", "O", null };
             game.board.SetBoard(gameBoard);
-            game.console = new ConsoleIO(new MockedInput("9"), new MockedOutput());
+            game.IO = new ConsoleIO(new MockedInput("9"), new MockedOutput());
             game.Turn();
 
             Assert.False(game.IsHorizontalWin(false));
