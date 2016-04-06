@@ -11,7 +11,7 @@ namespace TicTacToe
         private IPlayer player2;
         private IPlayer HumanPlayer = new HumanPlayer();
         private IPlayer ComputerPlayer = new ComputerPlayer();
-        private bool turn = true;
+        public bool turn = true;
 
         private bool gameOver = false;
         private bool tie = false;

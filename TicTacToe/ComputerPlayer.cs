@@ -18,7 +18,7 @@ namespace TicTacToe
             Dictionary<string, int> emptyDict = new Dictionary<string, int>();
             this.game = new Game(boardArray.Length);
             this.game.board.SetBoard(boardArray);
-            int move = negamax(boardArray, false, 0, new Dictionary<string, int>());
+            int move = negamax(boardArray, !game.turn, 0, new Dictionary<string, int>());
             return move;
         }
 
