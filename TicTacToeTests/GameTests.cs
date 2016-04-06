@@ -29,7 +29,7 @@ namespace TicTacToeTests
             game.Move(0, true);
             string[] gameBoard = { "X", null, null, null, null, null, null, null, null };
 
-            Assert.Equal(IsEqualBoard(game.board.GetBoardArray(), gameBoard), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -39,7 +39,7 @@ namespace TicTacToeTests
             game.Move(0, true);
             string[] gameBoard = { "X", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null };
 
-            Assert.Equal(IsEqualBoard(game.board.GetBoardArray(), gameBoard), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace TicTacToeTests
             game.Move(15, true);
             string[] gameBoard = { null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, "X" };
 
-            Assert.Equal(IsEqualBoard(game.board.GetBoardArray(), gameBoard), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace TicTacToeTests
             game.console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
             game.Turn();
 
-            Assert.Equal(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -71,7 +71,7 @@ namespace TicTacToeTests
             game.console = new ConsoleIO(new MockedInput("1"), new MockedOutput());
             game.Turn();
 
-            Assert.Equal(IsEqualBoard(game.board.GetBoardArray(), gameBoard), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace TicTacToeTests
             game.console = new ConsoleIO(new MockedInput("16"), new MockedOutput());
             game.Turn();
 
-            Assert.Equal(IsEqualBoard(game.board.GetBoardArray(), gameBoard), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace TicTacToeTests
             game.Turn();
             game.Turn(); //Second Turn Computer Goes
 
-            Assert.Equal(IsEqualBoard(gameBoard, game.board.GetBoardArray()), true);
+            Assert.Equal(gameBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -306,7 +306,7 @@ namespace TicTacToeTests
 
             game.ResetGame();
 
-            Assert.True(IsEqualBoard(game.board.GetBoardArray(), emptyBoard));
+            Assert.Equal(emptyBoard, game.board.GetBoardArray());
         }
 
         [Fact]
@@ -374,53 +374,6 @@ namespace TicTacToeTests
             game.board.SetBoard(gameBoard);
 
             Assert.True(game.IsDiagonalWin(false));
-        }
-
-        public bool IsEqualArrayOfInts(int[][] array1, int[][] array2)
-        {
-            if (array1.Length == array2.Length)
-            {
-                for (int i = 0; i < array1.Length; i++)
-                {
-                    if (array1[i].Length != array2[i].Length)
-                    {
-                        Console.WriteLine(array1[i].Length + " - LENGTH - " + array2[i].Length);
-                        return false;
-                    }
-                    for (int j = 0; j < array1[i].Length; j++)
-                    {
-                        if (array1[i][j] != array2[i][j])
-                        {
-                            Console.WriteLine(array1[i][j] + " - != - " + array2[i][j]);
-                            return false;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                return false;
-            }
-            return true;
-        }
-
-        public bool IsEqualBoard(string[] board1, string[] board2)
-        {
-            if (board1.Length == board2.Length)
-            {
-                for (int i = 0; i < board1.Length; i++)
-                {
-                    if (board1[i] != board2[i])
-                    {
-                        return false;
-                    }
-                }
-            }
-            else
-            {
-                return false;
-            }
-            return true;
         }
     }
 }
