@@ -5,7 +5,12 @@ install:
   - nuget install xunit.runners -Version 2.0.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release TicTacToe.sln
-  - cd testrunner/xunit.runners.2.0.0/tools
+  - ls
+  - cd testrunner
+  - ls
+  - cd xunit.runners.2.0.0
+  - ls
+  - cd tools
   - ls
   - cd ..
   - cd ..
