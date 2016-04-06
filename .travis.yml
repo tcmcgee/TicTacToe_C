@@ -2,7 +2,7 @@ language: csharp
 solution: TicTacToe.sln
 install:
   - nuget restore TicTacToe.sln
-  - nuget install xunit.runners -Version 2.0.0 -OutputDirectory testrunner
+  - nuget install xunit.runners -Version 2.1.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release TicTacToe.sln
-  - mono ./testrunner/xunit.runners.2.0.0/tools/xunit.console.clr4.exe ./TicTacToeTests/bin/Release/TicTacToeTests.dll
+  - mono ./testrunner/xunit.runners.2.1.0/tools/xunit.console.clr4.exe ./TicTacToeTests/bin/Release/TicTacToeTests.dll
