@@ -1,30 +1,8 @@
 ﻿using TicTacToe;
 using Xunit;
 
-namespace TicTacToeTests
+namespace TicTacToe
 {
-    internal class MockedInput : IUserInput
-    {
-        private string returnValue;
-
-        public MockedInput(string returnValue)
-        {
-            this.returnValue = returnValue;
-        }
-
-        public string GetInput()
-        {
-            return this.returnValue;
-        }
-    }
-
-    internal class MockedOutput : IUserOutput
-    {
-        public void Display(string str)
-        {
-        }
-    }
-
     public class ConsoleIOTests
     {
         [Fact]

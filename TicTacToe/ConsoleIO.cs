@@ -7,6 +7,8 @@ namespace TicTacToe
     {
         public IUserOutput output;
         public IUserInput input;
+        private MockedInput mockedInput;
+        private MockedOutput mockedOutput;
 
         public ConsoleIO(IUserInput input, IUserOutput output)
         {

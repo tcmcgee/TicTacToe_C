@@ -47,6 +47,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TicTacToe.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TicTacToe.Core.1.0.0\lib\net45\TicTacToe.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -71,17 +75,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
-    <Compile Include="ComputerPlayer.cs" />
     <Compile Include="ConsoleOutput.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="HumanPlayer.cs" />
-    <Compile Include="IIO.cs" />
-    <Compile Include="IPlayer.cs" />
-    <Compile Include="IUserOutput.cs" />
     <Compile Include="ConsoleInput.cs" />
     <Compile Include="ConsoleIO.cs" />
-    <Compile Include="IUserInput.cs" />
     <Compile Include="StartGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
