@@ -4,7 +4,7 @@ using TicTacToe;
 using IUserInput = TicTacToe.IUserInput;
 using IUserOutput = TicTacToe.IUserOutput;
 
-namespace TicTacToe
+namespace TicTacToeConsole
 {
     public class ConsoleIO : IIO
     {

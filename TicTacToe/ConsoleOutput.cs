@@ -1,5 +1,5 @@
 ﻿using System;
-using IUserOutput = TicTacToe.IUserOutput;
+using TicTacToe;
 
 namespace TicTacToeConsole
 {

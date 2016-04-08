@@ -1,4 +1,5 @@
 ﻿using TicTacToe;
+using TicTacToeConsole;
 using Xunit;
 
 namespace TicTacToe
