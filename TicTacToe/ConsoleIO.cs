@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Text;
 using TicTacToe;
-using IUserInput = TicTacToe.IUserInput;
-using IUserOutput = TicTacToe.IUserOutput;
 
 namespace TicTacToeConsole
 {
