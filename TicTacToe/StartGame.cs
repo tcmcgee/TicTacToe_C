@@ -1,6 +1,7 @@
 ﻿using TicTacToe;
+using TicTacToeConsole;
 
-namespace TicTacToe
+namespace TicTacToeConsole
 {
     internal class StartGame
     {

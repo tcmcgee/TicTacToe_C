@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using TicTacToe;
+using IUserInput = TicTacToe.IUserInput;
+using IUserOutput = TicTacToe.IUserOutput;
 
 namespace TicTacToe
 {
@@ -8,8 +10,6 @@ namespace TicTacToe
     {
         public IUserOutput output;
         public IUserInput input;
-        private MockedInput mockedInput;
-        private MockedOutput mockedOutput;
 
         public ConsoleIO(IUserInput input, IUserOutput output)
         {

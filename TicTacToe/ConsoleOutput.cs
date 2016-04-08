@@ -1,7 +1,7 @@
 ﻿using System;
-using TicTacToe;
+using IUserOutput = TicTacToe.IUserOutput;
 
-namespace TicTacToe
+namespace TicTacToeConsole
 {
     public class ConsoleOutput : IUserOutput
     {
