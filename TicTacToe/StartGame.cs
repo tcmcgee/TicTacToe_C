@@ -1,4 +1,6 @@
-﻿namespace TicTacToe
+﻿using TicTacToe;
+
+namespace TicTacToe
 {
     internal class StartGame
     {
