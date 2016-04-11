@@ -4,5 +4,7 @@ install:
   - mono paket.exe install
   - nuget install xunit.runner.console -Version 2.1.0 -OutputDirectory testrunner
 script:
+  - mv ./paket-files/tcmcgee/TicTacToe.Core/TicTacToe.Core.1.0.0.nupkg ./paket-files/tcmcgee/TicTacToe.Core/TicTacToe.Core.1.0.0.zip 
+  - unzip ./paket-files/tcmcgee/TicTacToe.Core/TicTacToe.Core.1.0.0.zip -d ./packages
   - xbuild /p:Configuration=Release TicTacToe.sln
   - mono ./testrunner/xunit.runner.console.2.1.0/tools/xunit.console.exe ./TicTacToeTests/bin/Release/TicTacToeTests.dll -noappdomain
