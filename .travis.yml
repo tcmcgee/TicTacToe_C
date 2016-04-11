@@ -1,4 +1,4 @@
-language: csharp
+language: csharp 
 solution: TicTacToe.sln
 install:
   - mono paket.exe install
